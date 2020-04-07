@@ -1,0 +1,2 @@
+rootProject.name='kit305assig02'
+include ':app'
