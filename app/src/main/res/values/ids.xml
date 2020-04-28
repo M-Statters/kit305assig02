@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="lblMaxTickets" type="id" />
+    <item name="lblPrice" type="id" />
+    <item name="lblName" type="id" />
+    <item name="myList" type="id" />
+</resources>
