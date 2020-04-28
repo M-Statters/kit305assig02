@@ -22,10 +22,11 @@ public class RaffleTable
             p.setName(c.getString(c.getColumnIndex(KEY_NAME)));
             p.setPrice(c.getInt(c.getColumnIndex(KEY_PRICE)));
             p.setMaxTickets(c.getInt(c.getColumnIndex(KEY_MAX_TICKETS)));
-            return p; }
+            return p;
+        }
     }
 
-    public static final String TABLE_NAME     = "raffle";
+    public static final String TABLE_NAME     = "raffles";
 
     public static final String KEY_RAFFLE_ID   = "raffle_id";
     public static final String KEY_NAME        = "name";

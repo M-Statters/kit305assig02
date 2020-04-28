@@ -36,12 +36,22 @@ public class MainActivity extends AppCompatActivity
         raffle2.setPrice(1);
         raffle2.setMaxTickets(25);
 
+        Ticket ticket1 = new Ticket();
+        ticket1.setName("John Smith");
+        ticket1.setPhone(0415276342);
+        ticket1.setEmail("john.smmith@gmail.com");
+
         //RaffleTable.insert(db, raffle1);
         //RaffleTable.insert(db, raffle2);
 
-        RaffleTable.removeRaffle(db,0, "Fund Raiser");
+        //TicketTable.insert(db, ticket1);
+
+        //RaffleTable.removeRaffle(db,0, "Fund Raiser");
+
+        //TicketTable.removeTicket(db, 0, "John Smith");
 
         final ArrayList<Raffle> raffles =RaffleTable.selectAll(db);
+        //final ArrayList<Ticket> tickets =TicketTable.selectAll(db);
 
         for (Raffle var : raffles)
         {
@@ -54,6 +64,9 @@ public class MainActivity extends AppCompatActivity
 
         final RaffleAdapter raffleListAdapter = new RaffleAdapter(getApplicationContext(),R.layout.raffle_list, raffles);
         myList.setAdapter(raffleListAdapter);
+
+        //final TicketAdapter ticketListAdapter = new TicketAdapter(getApplicationContext(),R.layout.raffle_list, tickets);
+        //myList.setAdapter(ticketListAdapter);
 
         myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

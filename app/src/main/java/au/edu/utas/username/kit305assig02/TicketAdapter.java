@@ -13,30 +13,30 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class RaffleAdapter extends ArrayAdapter<Raffle>
+public class TicketAdapter extends ArrayAdapter<Ticket>
 {
     private int mLayoutResourceID;
-    public RaffleAdapter(Context context, int resource, List<Raffle> objects)
+    public TicketAdapter(Context context, int resource, List<Ticket> objects)
     {
         super(context, resource, objects);
         this.mLayoutResourceID = resource;
     }
 
-    @NonNull
+    /*@NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
     {
         LayoutInflater layoutInflater = (LayoutInflater)getContext().getSystemService((Service.LAYOUT_INFLATER_SERVICE));
 
         View row = layoutInflater.inflate(mLayoutResourceID, parent, false);
-        Raffle r = this.getItem(position);
-        TextView lblRaffleName = row.findViewById(R.id.lblRaffleName);
-        lblRaffleName.setText(r.getName());
-        TextView lblPrice = row.findViewById(R.id.lblPrice);
-        lblPrice.setText("Ticket Cost $"+r.getPrice());
-        TextView lblMaxTickets = row.findViewById(R.id.lblMaxTickets);
-        lblMaxTickets.setText("Total Tickets: "+r.getMaxTickets());
+        Ticket t = this.getItem(position);
+        TextView lblTicketName = row.findViewById(R.id.lblTicketName);
+        lblTicketName.setText(t.getName());
+        //TextView lblPhone = row.findViewById(R.id.lblPhone);
+        //lblPhone.setText(t.getPhone());
+        TextView lblEmail = row.findViewById(R.id.lblEmail);
+        lblEmail.setText(t.getEmail());
 
         return row;
-    }
+    }*/
 }
