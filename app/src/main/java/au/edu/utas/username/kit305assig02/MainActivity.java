@@ -54,7 +54,8 @@ public class MainActivity extends AppCompatActivity
 
         //Open the database, so that we can read and write
         Database databaseConnection = new Database(this);
-        final SQLiteDatabase db = databaseConnection.open();
+        final SQLiteDatabase dbR = databaseConnection.open();
+        final SQLiteDatabase dbT = databaseConnection.open();
 
         Raffle raffle1 = new Raffle();
         raffle1.setName("Fund Raiser");
@@ -74,16 +75,22 @@ public class MainActivity extends AppCompatActivity
         //RaffleTable.insert(db, raffle1);
         //RaffleTable.insert(db, raffle2);
 
-        //TicketTable.insert(db, ticket1);
+        TicketTable.insert(dbT, ticket1);
 
         //RaffleTable.removeRaffle(db,0, "Chocolate Wheel");
 
         //TicketTable.removeTicket(db, 0, "John Smith");
 
-        ArrayList<Raffle> raffles =RaffleTable.selectAll(db);
-        //ArrayList<Ticket> tickets =TicketTable.selectAll(db);
+        ArrayList<Raffle> raffles =RaffleTable.selectAll(dbR);
+        ArrayList<Ticket> tickets =TicketTable.selectAll(dbT);
 
         for (Raffle var : raffles)
+        {
+            //Log.d(TAG, var.getPropertyID());
+            Log.d(TAG, var.getName());
+        }
+
+        for (Ticket var : tickets)
         {
             //Log.d(TAG, var.getPropertyID());
             Log.d(TAG, var.getName());
