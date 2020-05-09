@@ -4,4 +4,6 @@
     <string name="new_raffle_name">New Raffle Name</string>
     <string name="max_tickets">Max Tickets</string>
     <string name="new_raffle">New Raffle</string>
+    <string name="ticket_limit">Ticket Limit</string>
+    <string name="create_raffle">Create Raffle</string>
 </resources>

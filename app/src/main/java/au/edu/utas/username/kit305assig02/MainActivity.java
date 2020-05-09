@@ -1,15 +1,45 @@
 package au.edu.utas.username.kit305assig02;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
+
+/* As the comments of this code will never be marked I will leave you a picture of something that will never happen in this code.
+
+                               |       |
+                                \\_V_//
+                                \/=|=\/
+                                 [=v=]
+                               __\___/_____
+                              /..[  _____  ]
+                             /_  [ [  M /] ]
+                            /../.[ [ M /@] ]
+                           <-->[_[ [M /@/] ]
+                          /../ [.[ [ /@/ ] ]
+     _________________]\ /__/  [_[ [/@/ C] ]
+    <_________________>>0---]  [=\ \@/ C / /
+       ___      ___   ]/000o   /__\ \ C / /
+          \    /              /....\ \_/ /
+       ....\||/....           [___/=\___/
+      .    .  .    .          [...] [...]
+     .      ..      .         [___/ \___]
+     .    0 .. 0    .         <---> <--->
+  /\/\.    .  .    ./\/\      [..]   [..]
+ / / / .../|  |\... \ \ \    _[__]   [__]_
+/ / /       \/       \ \ \  [____>   <____]
+
+*/
 
 public class MainActivity extends AppCompatActivity
 {
@@ -46,12 +76,12 @@ public class MainActivity extends AppCompatActivity
 
         //TicketTable.insert(db, ticket1);
 
-        //RaffleTable.removeRaffle(db,0, "Fund Raiser");
+        //RaffleTable.removeRaffle(db,0, "Chocolate Wheel");
 
         //TicketTable.removeTicket(db, 0, "John Smith");
 
-        final ArrayList<Raffle> raffles =RaffleTable.selectAll(db);
-        //final ArrayList<Ticket> tickets =TicketTable.selectAll(db);
+        ArrayList<Raffle> raffles =RaffleTable.selectAll(db);
+        //ArrayList<Ticket> tickets =TicketTable.selectAll(db);
 
         for (Raffle var : raffles)
         {
@@ -65,12 +95,24 @@ public class MainActivity extends AppCompatActivity
         final RaffleAdapter raffleListAdapter = new RaffleAdapter(getApplicationContext(),R.layout.raffle_list, raffles);
         myList.setAdapter(raffleListAdapter);
 
-        //final TicketAdapter ticketListAdapter = new TicketAdapter(getApplicationContext(),R.layout.raffle_list, tickets);
+        //TicketAdapter ticketListAdapter = new TicketAdapter(getApplicationContext(),R.layout.raffle_list, tickets);
         //myList.setAdapter(ticketListAdapter);
+
+        FloatingActionButton btnCreateNewRaffle = findViewById(R.id.btnCreateNewRaffle);
+        btnCreateNewRaffle.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent i = new Intent(view.getContext(), NewRaffle.class);
+                startActivityForResult(i, 0);
+            }
+        });
 
         myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
 
             }
         });

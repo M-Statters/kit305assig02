@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RaffleDetails$NewRaffle"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/lblRaffleName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        android:clickable="false"
+        android:focusable="true"
+        android:gravity="center"
+        android:textSize="20sp"
+        tools:text="Raffle Name" />
+
+    <TextView
+        android:id="@+id/lblDescription"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:clickable="false"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:textSize="20sp"
+        tools:text="Description" />
+
+    <TextView
+        android:id="@+id/lblRecentPurchase"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginBottom="30dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:textSize="20sp"
+        tools:text="Most recent Purchase" />
+
+    <TextView
+        android:id="@+id/lblRaffleStatus"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        tools:text="Raffle Status" />
+
+    <Button
+        android:id="@+id/btnUpdateDetails"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        tools:text="Update Details" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        tools:text="Cancel" />
+
+    <Button
+        android:id="@+id/btnNewTicket"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        tools:text="New Ticket" />
+
+
+</LinearLayout>
