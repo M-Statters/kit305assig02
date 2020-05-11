@@ -28,6 +28,9 @@ public class NewRaffle extends AppCompatActivity
                 EditText raffleName = findViewById(R.id.txtName);
                 String enteredName = raffleName.getText().toString();
 
+                EditText raffleDescription = findViewById(R.id.txtDescription);
+                String enteredDescription = raffleDescription.getText().toString();
+
                 // This is the dumbest shit I have ever seen
                 EditText rafflePrice = findViewById(R.id.intPrice);
                 String enteredPrice = rafflePrice.getText().toString();
@@ -37,12 +40,14 @@ public class NewRaffle extends AppCompatActivity
                 String enteredMax = raffleMax.getText().toString();
                 int valueMax = Integer.parseInt(enteredMax);
 
-                Raffle raffle1 = new Raffle();
-                raffle1.setName(enteredName);
-                raffle1.setPrice(valuePrice);
-                raffle1.setMaxTickets(valueMax);
+                Raffle raffle = new Raffle();
+                raffle.setName(enteredName);
+                raffle.setDescription(enteredDescription);
+                raffle.setPrice(valuePrice);
+                raffle.setMaxTickets(valueMax);
+                raffle.setStatus(true);
 
-                RaffleTable.insert(db, raffle1);
+                RaffleTable.insert(db, raffle);
 
                 Intent i = new Intent(NewRaffle.this, MainActivity.class);
                 startActivity(i);

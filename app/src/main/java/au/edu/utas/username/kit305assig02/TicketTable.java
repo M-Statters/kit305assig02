@@ -29,6 +29,7 @@ public class TicketTable
     public static final String TABLE_NAME     = "tickets";
 
     public static final String KEY_TICKET_ID   = "ticket_id";
+    public static final String KEY_RAFFLE_ID   = "raffle_id";
     public static final String KEY_NAME        = "name";
     public static final String KEY_PHONE       = "phone";
     public static final String KEY_EMAIL       = "email";
@@ -36,6 +37,7 @@ public class TicketTable
     public static final String CREATE_STATEMENT = "CREATE TABLE     "
             + TABLE_NAME
             + "    (" + KEY_TICKET_ID + " integer primary key autoincrement, "
+            + KEY_RAFFLE_ID + " int not null, "
             + KEY_NAME + " string not null, "
             + KEY_PHONE + " int not null, "
             + KEY_EMAIL + " string not null "
@@ -43,6 +45,7 @@ public class TicketTable
     public static void insert(SQLiteDatabase db, Ticket t)
     {
         ContentValues values = new ContentValues();
+        values.put(KEY_RAFFLE_ID, t.getRaffleID());
         values.put(KEY_NAME, t.getName());
         values.put(KEY_PHONE, t.getPhone());
         values.put(KEY_EMAIL, t.getEmail());
@@ -85,6 +88,7 @@ public class TicketTable
     {
         ContentValues values = new ContentValues();
         values.put(KEY_TICKET_ID, t.getTicketID());
+        values.put(KEY_RAFFLE_ID, t.getRaffleID());
         values.put(KEY_NAME, t.getName());
         values.put(KEY_PHONE, t.getPhone());
         values.put(KEY_EMAIL, t.getEmail());

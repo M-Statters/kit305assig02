@@ -61,12 +61,12 @@
         tools:text="Update Details" />
 
     <Button
-        android:id="@+id/btnCancel"
+        android:id="@+id/btnDelete"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
-        tools:text="Cancel" />
+        tools:text="Delete Raffle" />
 
     <Button
         android:id="@+id/btnNewTicket"

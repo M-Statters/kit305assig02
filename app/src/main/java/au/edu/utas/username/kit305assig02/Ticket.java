@@ -3,12 +3,16 @@ package au.edu.utas.username.kit305assig02;
 public class Ticket
 {
     private int mTicketID;
+    private int mRaffleID;
     private String mName;
     private int mPhone;
     private String mEmail;
 
     public int getTicketID() { return  mTicketID; }
     public void setTicketID(int s) { this.mTicketID = s; }
+
+    public int getRaffleID() { return  mRaffleID; }
+    public void setRaffleID(int s) { this.mRaffleID = s; }
 
     public String getName() { return  mName; }
     public void setName(String s) { this.mName = s; }

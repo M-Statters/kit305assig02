@@ -30,22 +30,28 @@ public class RaffleTable
 
     public static final String KEY_RAFFLE_ID   = "raffle_id";
     public static final String KEY_NAME        = "name";
+    public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_PRICE       = "price";
     public static final String KEY_MAX_TICKETS = "max_tickets";
+    public static final String KEY_STATUS      = "status";
 
     public static final String CREATE_STATEMENT = "CREATE TABLE     "
             + TABLE_NAME
             + "    (" + KEY_RAFFLE_ID + " integer primary key autoincrement, "
             + KEY_NAME + " string not null, "
+            + KEY_DESCRIPTION + " string not null, "
             + KEY_PRICE + " double not null, "
-            + KEY_MAX_TICKETS + " int not null "
+            + KEY_MAX_TICKETS + " int not null, "
+            + KEY_STATUS + " boolean not null "
             + ");";
     public static void insert(SQLiteDatabase db, Raffle r)
     {
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, r.getName());
+        values.put(KEY_DESCRIPTION, r.getDescription());
         values.put(KEY_PRICE, r.getPrice());
         values.put(KEY_MAX_TICKETS, r.getMaxTickets());
+        values.put(KEY_STATUS, r.getStatus());
 
         db.insert(TABLE_NAME, null, values);
     }
@@ -84,10 +90,11 @@ public class RaffleTable
     public static void update(SQLiteDatabase db, Raffle r)
     {
         ContentValues values = new ContentValues();
-        values.put(KEY_RAFFLE_ID, r.getRaffleID());
         values.put(KEY_NAME, r.getName());
+        values.put(KEY_DESCRIPTION, r.getDescription());
         values.put(KEY_PRICE, r.getPrice());
         values.put(KEY_MAX_TICKETS, r.getMaxTickets());
+        values.put(KEY_STATUS, r.getStatus());
 
         db.update(TABLE_NAME, values, KEY_RAFFLE_ID+"= ?", new String[]{ ""+r.getRaffleID() });
     }

@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -57,30 +57,6 @@ public class MainActivity extends AppCompatActivity
         final SQLiteDatabase dbR = databaseConnection.open();
         final SQLiteDatabase dbT = databaseConnection.open();
 
-        Raffle raffle1 = new Raffle();
-        raffle1.setName("Fund Raiser");
-        raffle1.setPrice(2);
-        raffle1.setMaxTickets(100);
-
-        Raffle raffle2 = new Raffle();
-        raffle2.setName("Chocolate Wheel");
-        raffle2.setPrice(1);
-        raffle2.setMaxTickets(25);
-
-        Ticket ticket1 = new Ticket();
-        ticket1.setName("John Smith");
-        ticket1.setPhone(0415276342);
-        ticket1.setEmail("john.smmith@gmail.com");
-
-        //RaffleTable.insert(db, raffle1);
-        //RaffleTable.insert(db, raffle2);
-
-        TicketTable.insert(dbT, ticket1);
-
-        //RaffleTable.removeRaffle(db,0, "Chocolate Wheel");
-
-        //TicketTable.removeTicket(db, 0, "John Smith");
-
         ArrayList<Raffle> raffles =RaffleTable.selectAll(dbR);
         ArrayList<Ticket> tickets =TicketTable.selectAll(dbT);
 
@@ -102,9 +78,6 @@ public class MainActivity extends AppCompatActivity
         final RaffleAdapter raffleListAdapter = new RaffleAdapter(getApplicationContext(),R.layout.raffle_list, raffles);
         myList.setAdapter(raffleListAdapter);
 
-        //TicketAdapter ticketListAdapter = new TicketAdapter(getApplicationContext(),R.layout.raffle_list, tickets);
-        //myList.setAdapter(ticketListAdapter);
-
         FloatingActionButton btnCreateNewRaffle = findViewById(R.id.btnCreateNewRaffle);
         btnCreateNewRaffle.setOnClickListener(new View.OnClickListener()
         {
@@ -115,6 +88,26 @@ public class MainActivity extends AppCompatActivity
                 startActivityForResult(i, 0);
             }
         });
+
+        myList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                final CardView raffleCard = findViewById(R.id.cardView);
+                raffleCard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        Intent i = new Intent(raffleCard.getContext(), RaffleDetails.class);
+                        startActivityForResult(i, 0);
+                    }
+                });
+
+            }
+        });
+
+
 
         myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
