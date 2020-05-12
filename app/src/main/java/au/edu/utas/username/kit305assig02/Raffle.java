@@ -7,7 +7,7 @@ public class Raffle
     private String mDescription;
     private double mPrice;
     private int mMaxTickets;
-    private boolean mStatus;
+    private int mStatus;
 
     public int getRaffleID() {return mRaffleID; }
     public void setRaffleID(int s) { this.mRaffleID = s; }
@@ -24,6 +24,6 @@ public class Raffle
     public int getMaxTickets() {return mMaxTickets; }
     public void setMaxTickets(int s) { this.mMaxTickets = s; }
 
-    public boolean getStatus() {return mStatus; }
-    public void setStatus(boolean s) { this.mStatus = s; }
+    public int getStatus() {return mStatus; }
+    public void setStatus(int s) { this.mStatus = s; }
 }

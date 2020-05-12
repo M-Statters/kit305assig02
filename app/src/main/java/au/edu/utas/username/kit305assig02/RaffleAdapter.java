@@ -32,6 +32,8 @@ public class RaffleAdapter extends ArrayAdapter<Raffle>
         Raffle r = this.getItem(position);
         TextView lblRaffleName = row.findViewById(R.id.lblRaffleName);
         lblRaffleName.setText(r.getName());
+        TextView lblRaffleID = row.findViewById(R.id.lblRaffleID);
+        //lblRaffleID.setText("Raffle ID: " + String.valueOf(r.getRaffleID()));
         TextView lblPrice = row.findViewById(R.id.lblPrice);
         lblPrice.setText("Ticket Cost $"+r.getPrice());
         TextView lblMaxTickets = row.findViewById(R.id.lblMaxTickets);

@@ -16,6 +16,7 @@
         android:focusable="true"
         android:gravity="center"
         android:textSize="20sp"
+        android:textStyle="bold"
         tools:text="Raffle Name" />
 
     <TextView
@@ -28,7 +29,7 @@
         android:focusableInTouchMode="true"
         android:gravity="center"
         android:marqueeRepeatLimit="marquee_forever"
-        android:singleLine="true"
+        android:singleLine="false"
         android:textSize="20sp"
         tools:text="Description" />
 
@@ -58,7 +59,7 @@
         android:layout_height="70dp"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
-        tools:text="Update Details" />
+        android:text="@string/update_details" />
 
     <Button
         android:id="@+id/btnDelete"
@@ -66,7 +67,7 @@
         android:layout_height="70dp"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
-        tools:text="Delete Raffle" />
+        android:text="@string/delete_raffle" />
 
     <Button
         android:id="@+id/btnNewTicket"
@@ -74,7 +75,7 @@
         android:layout_height="70dp"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
-        tools:text="New Ticket" />
+        android:text="@string/new_ticket" />
 
 
 </LinearLayout>

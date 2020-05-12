@@ -9,4 +9,7 @@
     <string name="description">Description</string>
     <string name="set_max_tickets">Set Max Tickets</string>
     <string name="set_ticket_price">Set Ticket Price</string>
+    <string name="update_details">Update Details</string>
+    <string name="delete_raffle">Delete Raffle</string>
+    <string name="new_ticket">New Ticket</string>
 </resources>
