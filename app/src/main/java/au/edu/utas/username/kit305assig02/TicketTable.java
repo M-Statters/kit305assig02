@@ -19,6 +19,7 @@ public class TicketTable
         {
             Ticket p = new Ticket();
             p.setTicketID(c.getInt(c.getColumnIndex(KEY_TICKET_ID)));
+            p.setRaffleID(c.getInt(c.getColumnIndex(KEY_RAFFLE_ID)));
             p.setName(c.getString(c.getColumnIndex(KEY_NAME)));
             p.setPhone(c.getInt(c.getColumnIndex(KEY_PHONE)));
             p.setEmail(c.getString(c.getColumnIndex(KEY_EMAIL)));

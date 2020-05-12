@@ -18,6 +18,9 @@ public class RaffleDetails extends AppCompatActivity
 {
         private static final String TAG = "RaffleDetails Log";
 
+        public static int CURRENT_RAFFLE;
+
+
         @SuppressLint("SetTextI18n")
         @Override
         protected void onCreate(Bundle savedInstanceState)
@@ -50,13 +53,27 @@ public class RaffleDetails extends AppCompatActivity
             else    { lblRaffleStatus.setText("Closed"); }
 
             Button btnDelete = findViewById(R.id.btnDelete);
-            btnDelete.setOnClickListener(new View.OnClickListener() {
+            btnDelete.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
                 public void onClick(View v)
                 {
                     Log.d(TAG, "Deleting: " + raffles.get(MainActivity.RAFFLE_ID).getName());
                     RaffleTable.removeRaffle(dbR, raffles.get(MainActivity.RAFFLE_ID).getRaffleID(), "");
                     Intent i = new Intent(RaffleDetails.this, MainActivity.class);
+                    startActivity(i);
+                }
+            });
+
+            Button btnNewTicket = findViewById(R.id.btnNewTicket);
+            btnNewTicket.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    CURRENT_RAFFLE = MainActivity.RAFFLE_ID;
+                    Intent i = new Intent(RaffleDetails.this, NewTicket.class);
+                    i.putExtra(String.valueOf(CURRENT_RAFFLE), MainActivity.RAFFLE_ID);
                     startActivity(i);
                 }
             });

@@ -12,4 +12,11 @@
     <string name="update_details">Update Details</string>
     <string name="delete_raffle">Delete Raffle</string>
     <string name="new_ticket">New Ticket</string>
+    <string name="name">Name</string>
+    <string name="Email">email</string>
+    <string name="email">Email</string>
+    <string name="create_ticket">create ticket</string>
+    <string name="phone">Phone</string>
+    <string name="how_many_tickets">How many tickets?</string>
+    <string name="tickets">Tickets</string>
 </resources>
