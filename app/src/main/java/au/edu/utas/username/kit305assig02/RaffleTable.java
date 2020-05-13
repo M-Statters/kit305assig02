@@ -21,8 +21,8 @@ public class RaffleTable
             p.setRaffleID(c.getInt(c.getColumnIndex(KEY_RAFFLE_ID)));
             p.setName(c.getString(c.getColumnIndex(KEY_NAME)));
             p.setDescription(c.getString(c.getColumnIndex(KEY_DESCRIPTION)));
-            p.setPrice(c.getInt(c.getColumnIndex(KEY_PRICE)));
-            p.setMaxTickets(c.getInt(c.getColumnIndex(KEY_MAX_TICKETS)));
+            p.setPrice(c.getString(c.getColumnIndex(KEY_PRICE)));
+            p.setMaxTickets(c.getString(c.getColumnIndex(KEY_MAX_TICKETS)));
             p.setStatus(c.getInt(c.getColumnIndex(KEY_STATUS)));
             return p;
         }

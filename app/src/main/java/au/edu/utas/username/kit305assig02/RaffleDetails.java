@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,6 +18,7 @@ public class RaffleDetails extends AppCompatActivity
         private static final String TAG = "RaffleDetails Log";
 
         public static int CURRENT_RAFFLE;
+        public static String RAFFLE_PRICE;
 
 
         @SuppressLint("SetTextI18n")
@@ -31,7 +31,8 @@ public class RaffleDetails extends AppCompatActivity
             final SQLiteDatabase dbR = databaseConnection.open();
             final SQLiteDatabase dbT = databaseConnection.open();
 
-            final ArrayList<Raffle> raffles =RaffleTable.selectAll(dbR);
+            final ArrayList<Raffle> raffles = RaffleTable.selectAll(dbR);
+            final ArrayList<Ticket> tickets = TicketTable.selectAll(dbT);
 
             TextView lblRaffleName = findViewById(R.id.lblRaffleName);
             // this took me way too long to do
@@ -43,14 +44,26 @@ public class RaffleDetails extends AppCompatActivity
             Log.d(TAG, "DESCRIPTION: " + raffles.get(MainActivity.RAFFLE_ID).getDescription());
             lblRaffleDescription.setText("Raffle description:\n" + raffles.get(MainActivity.RAFFLE_ID).getDescription());
 
-            TextView lblRecentPurchase = findViewById(R.id.lblRecentPurchase);
-            //lblRecentPurchase.setText(
+            TextView lblPrice = findViewById(R.id.lblPrice);
+            lblPrice.setText("Ticket Price:\n" + "$ " + raffles.get(MainActivity.RAFFLE_ID).getPrice());
 
             TextView lblRaffleStatus = findViewById(R.id.lblRaffleStatus);
             Log.d(TAG, "STATUS: " + raffles.get(MainActivity.RAFFLE_ID).getStatus());
             if (raffles.get(MainActivity.RAFFLE_ID).getStatus() == 1)
-                    { lblRaffleStatus.setText("Open"); }
-            else    { lblRaffleStatus.setText("Closed"); }
+                    { lblRaffleStatus.setText("Status:\nOpen"); }
+            else    { lblRaffleStatus.setText("Status:\nClosed"); }
+
+            Button btnUpdate = findViewById(R.id.btnUpdateDetails);
+            btnUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    CURRENT_RAFFLE = MainActivity.RAFFLE_ID;
+                    Intent i = new Intent(RaffleDetails.this, UpdateRaffle.class);
+                    i.putExtra(String.valueOf(CURRENT_RAFFLE), MainActivity.RAFFLE_ID);
+                    startActivity(i);
+                }
+            });
 
             Button btnDelete = findViewById(R.id.btnDelete);
             btnDelete.setOnClickListener(new View.OnClickListener()
@@ -72,8 +85,10 @@ public class RaffleDetails extends AppCompatActivity
                 public void onClick(View v)
                 {
                     CURRENT_RAFFLE = MainActivity.RAFFLE_ID;
+                    RAFFLE_PRICE = raffles.get(MainActivity.RAFFLE_ID).getPrice();
                     Intent i = new Intent(RaffleDetails.this, NewTicket.class);
                     i.putExtra(String.valueOf(CURRENT_RAFFLE), MainActivity.RAFFLE_ID);
+                    i.putExtra(String.valueOf(RAFFLE_PRICE), MainActivity.RAFFLE_ID);
                     startActivity(i);
                 }
             });

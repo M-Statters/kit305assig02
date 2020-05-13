@@ -7,26 +7,48 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class NewRaffle extends AppCompatActivity
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+
+public class UpdateRaffle extends AppCompatActivity
 {
-    private static final String TAG = "NewRaffle Log";
+    private static final String TAG = "UpdateRaffle Log";
+
+    public static int RAFFLE_ID;
+    public static int SELECTED_RAFFLE;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_raffle);
-        Database databaseConnection = new Database(this);
-        final SQLiteDatabase db = databaseConnection.open();
+    protected void onCreate(Bundle savedInstanceState) {
 
-        Button btnCreateRaffle = findViewById(R.id.btnCreate);
-        btnCreateRaffle.setOnClickListener(new View.OnClickListener()
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.update_raffle);
+        Database databaseConnection = new Database(this);
+        final SQLiteDatabase dbR = databaseConnection.open();
+
+        final ArrayList<Raffle> raffles = RaffleTable.selectAll(dbR);
+
+        TextView txtRaffleName = findViewById(R.id.txtName);
+        txtRaffleName.setText(raffles.get(RaffleDetails.CURRENT_RAFFLE).getName());
+
+        TextView txtRaffleDescription = findViewById(R.id.txtDescription);
+        txtRaffleDescription.setText(raffles.get(RaffleDetails.CURRENT_RAFFLE).getDescription());
+
+        TextView intPrice = findViewById(R.id.intPrice);
+        intPrice.setText(raffles.get(RaffleDetails.CURRENT_RAFFLE).getPrice());
+
+        TextView intTickets = findViewById(R.id.intMaxTickets);
+        intTickets.setText(raffles.get(RaffleDetails.CURRENT_RAFFLE).getMaxTickets());
+
+        Button btnUpdate = findViewById(R.id.btnUpdate);
+        btnUpdate.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View view)
+            public void onClick(View v)
             {
                 EditText raffleName = findViewById(R.id.txtName);
                 String enteredName = raffleName.getText().toString();
@@ -54,9 +76,10 @@ public class NewRaffle extends AppCompatActivity
                 raffle.setMaxTickets(enteredMax);
                 raffle.setStatus(1);
 
-                RaffleTable.insert(db, raffle);
+                RaffleTable.update(dbR, raffle);
 
-                Intent i = new Intent(NewRaffle.this, MainActivity.class);
+                Intent i = new Intent(UpdateRaffle.this, RaffleDetails.class);
+                i.putExtra(String.valueOf(SELECTED_RAFFLE), raffle.getRaffleID());
                 startActivity(i);
             }
         });

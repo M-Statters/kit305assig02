@@ -19,6 +19,7 @@
         <activity android:name=".NewRaffle"></activity>
         <activity android:name=".RaffleDetails"></activity>
         <activity android:name=".NewTicket"></activity>
+        <activity android:name=".UpdateRaffle"></activity>
     </application>
 
 </manifest>

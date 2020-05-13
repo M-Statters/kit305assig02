@@ -21,8 +21,10 @@ public class TicketTable
             p.setTicketID(c.getInt(c.getColumnIndex(KEY_TICKET_ID)));
             p.setRaffleID(c.getInt(c.getColumnIndex(KEY_RAFFLE_ID)));
             p.setName(c.getString(c.getColumnIndex(KEY_NAME)));
-            p.setPhone(c.getInt(c.getColumnIndex(KEY_PHONE)));
+            p.setPhone(c.getString(c.getColumnIndex(KEY_PHONE)));
             p.setEmail(c.getString(c.getColumnIndex(KEY_EMAIL)));
+            p.setTime(c.getString(c.getColumnIndex(KEY_TIME)));
+            p.setPrice(c.getString((c.getColumnIndex(KEY_PRICE))));
             return p;
         }
     }
@@ -34,6 +36,8 @@ public class TicketTable
     public static final String KEY_NAME        = "name";
     public static final String KEY_PHONE       = "phone";
     public static final String KEY_EMAIL       = "email";
+    public static final String KEY_TIME        = "time";
+    public static final String KEY_PRICE       = "price";
 
     public static final String CREATE_STATEMENT = "CREATE TABLE     "
             + TABLE_NAME
@@ -41,7 +45,9 @@ public class TicketTable
             + KEY_RAFFLE_ID + " int not null, "
             + KEY_NAME + " string not null, "
             + KEY_PHONE + " int not null, "
-            + KEY_EMAIL + " string not null "
+            + KEY_EMAIL + " string not null, "
+            + KEY_TIME + " string not null, "
+            + KEY_PRICE + " int not null "
             + ");";
     public static void insert(SQLiteDatabase db, Ticket t)
     {
@@ -50,6 +56,8 @@ public class TicketTable
         values.put(KEY_NAME, t.getName());
         values.put(KEY_PHONE, t.getPhone());
         values.put(KEY_EMAIL, t.getEmail());
+        values.put(KEY_TIME, t.getTime());
+        values.put(KEY_PRICE, t.getPrice());
 
         db.insert(TABLE_NAME, null, values);
     }
@@ -93,6 +101,8 @@ public class TicketTable
         values.put(KEY_NAME, t.getName());
         values.put(KEY_PHONE, t.getPhone());
         values.put(KEY_EMAIL, t.getEmail());
+        values.put(KEY_TIME, t.getTime());
+        values.put(KEY_PRICE, t.getPrice());
 
         db.update(TABLE_NAME, values, KEY_TICKET_ID+"= ?", new String[]{ ""+t.getTicketID() });
     }

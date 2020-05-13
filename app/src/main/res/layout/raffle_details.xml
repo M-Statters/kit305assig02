@@ -23,6 +23,7 @@
         android:id="@+id/lblDescription"
         android:layout_width="match_parent"
         android:layout_height="67dp"
+        android:layout_marginBottom="30dp"
         android:clickable="false"
         android:ellipsize="marquee"
         android:focusable="true"
@@ -34,7 +35,7 @@
         tools:text="Description" />
 
     <TextView
-        android:id="@+id/lblRecentPurchase"
+        android:id="@+id/lblPrice"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginBottom="30dp"
@@ -42,7 +43,7 @@
         android:focusable="true"
         android:gravity="center"
         android:textSize="20sp"
-        tools:text="Most recent Purchase" />
+        tools:text="Ticket Price" />
 
     <TextView
         android:id="@+id/lblRaffleStatus"

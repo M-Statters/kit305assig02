@@ -5,8 +5,8 @@ public class Raffle
     private int mRaffleID;
     private String mName;
     private String mDescription;
-    private double mPrice;
-    private int mMaxTickets;
+    private String mPrice;
+    private String mMaxTickets;
     private int mStatus;
 
     public int getRaffleID() {return mRaffleID; }
@@ -18,11 +18,11 @@ public class Raffle
     public String  getDescription() {return mDescription; }
     public void setDescription(String s) { this.mDescription = s; }
 
-    public double getPrice() {return mPrice; }
-    public void setPrice(double s) { this.mPrice = s; }
+    public String getPrice() {return mPrice; }
+    public void setPrice(String s) { this.mPrice = s; }
 
-    public int getMaxTickets() {return mMaxTickets; }
-    public void setMaxTickets(int s) { this.mMaxTickets = s; }
+    public String getMaxTickets() {return mMaxTickets; }
+    public void setMaxTickets(String s) { this.mMaxTickets = s; }
 
     public int getStatus() {return mStatus; }
     public void setStatus(int s) { this.mStatus = s; }
