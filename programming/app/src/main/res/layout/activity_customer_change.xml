@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CustomerChangeActivity"
+    android:orientation="vertical">
+    <EditText
+        android:paddingTop="20dp"
+        android:id="@+id/customer_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/customer"
+        android:textSize="20sp"
+        android:layout_marginBottom="30dp"
+        />
+    <EditText
+        android:id="@+id/customer_email"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="@string/email"
+        android:textSize="20sp"
+        android:paddingTop="20dp"
+        android:layout_marginBottom="30dp" />
+    <EditText
+        android:id="@+id/customer_address"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:paddingTop="20dp"
+        android:text="@string/address"
+        android:textSize="20sp"
+        />
+
+    <Button
+        android:paddingTop="20dp"
+        android:id="@+id/btn_change_save"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:text="@string/save"/>
+    <Button
+        android:id="@+id/btn_cancel_save"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:text="@string/cancel"/>
+
+
+</LinearLayout>

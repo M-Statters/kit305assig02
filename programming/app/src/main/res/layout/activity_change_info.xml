@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChangeInfoActivity"
+    android:orientation="vertical">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/raffle_name"
+        android:textSize="20sp"
+        android:layout_marginBottom="30dp"
+
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:text="@string/description"
+        android:textSize="20sp"
+        />
+
+
+    <EditText
+        android:id="@+id/customer_name"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="@string/customer"
+        android:textSize="20sp"
+        android:layout_marginBottom="30dp"
+        />
+
+    <Button
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="@string/image" />
+    <RadioGroup
+        android:id="@+id/rg_2"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <RadioButton
+            android:id="@+id/rb_raffle_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/open"
+            android:button="@null"
+            android:background="@drawable/select_color"
+            android:checked="true"
+            android:gravity="center"
+            android:textSize="10sp"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:id="@+id/rb_raffle_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/closed"
+            android:textSize="10sp"
+            android:background="@drawable/select_color"
+            android:button="@null"
+            android:gravity="center"
+            android:layout_weight="1" />
+        <RadioButton
+            android:id="@+id/rb_raffle_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/completed"
+            android:textSize="10sp"
+            android:background="@drawable/select_color"
+            android:button="@null"
+            android:gravity="center"
+            android:layout_weight="1" />
+        <RadioButton
+            android:id="@+id/rb_raffle_4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/cancelled"
+            android:textSize="10sp"
+            android:background="@drawable/select_color"
+            android:button="@null"
+            android:gravity="center"
+            android:layout_weight="1" />
+    </RadioGroup>
+    <Button
+        android:id="@+id/btn_change_info"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:text="@string/confirm"/>
+    <Button
+        android:id="@+id/btn_cancel_change"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:text="@string/cancel"/>
+
+</LinearLayout>
