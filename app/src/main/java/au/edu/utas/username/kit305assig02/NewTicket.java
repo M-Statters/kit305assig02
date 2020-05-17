@@ -28,6 +28,8 @@ public class NewTicket extends AppCompatActivity
         Database databaseConnection = new Database(this);
         final SQLiteDatabase dbT = databaseConnection.open();
 
+        getSupportActionBar().setTitle("Raffle Management Application");
+
         Button btnCreateRaffle = findViewById(R.id.btnCreate);
         btnCreateRaffle.setOnClickListener(new View.OnClickListener()
         {

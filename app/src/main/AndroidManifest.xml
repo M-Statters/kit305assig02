@@ -17,9 +17,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".NewRaffle"></activity>
-        <activity android:name=".RaffleDetails"></activity>
-        <activity android:name=".NewTicket"></activity>
-        <activity android:name=".UpdateRaffle"></activity>
+        <activity android:name=".RaffleDetails" android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".NewTicket" android:parentActivityName=".RaffleDetails"></activity>
+        <activity android:name=".RaffleUpdate" android:parentActivityName=".RaffleDetails"></activity>
+        <activity android:name=".RaffleDraw" android:parentActivityName=".RaffleDetails"></activity>
+        <activity android:name=".TicketList" android:parentActivityName=".RaffleDetails"></activity>
+        <activity android:name=".ImageSelect" android:parentActivityName=".RaffleDetails"></activity>
     </application>
 
 </manifest>

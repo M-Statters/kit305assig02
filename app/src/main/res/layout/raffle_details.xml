@@ -2,12 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayoutRaffleDetails"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RaffleDetails$NewRaffle"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".RaffleDetails$NewRaffle">
 
-    <TextView
+    <ImageView
+        android:id="@+id/imgRaffle"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:contentDescription="@string/raffle_image"
+        tools:src="@tools:sample/avatars" />
+
+    <!--<TextView
         android:id="@+id/lblRaffleName"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -17,7 +25,7 @@
         android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:text="Raffle Name" />
+        tools:text="Raffle Name" />-->
 
     <TextView
         android:id="@+id/lblDescription"

@@ -1,7 +1,5 @@
 package au.edu.utas.username.kit305assig02;
 
-import java.time.Instant;
-
 public class Ticket
 {
     private int mTicketID;

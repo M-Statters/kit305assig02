@@ -3,6 +3,7 @@ package au.edu.utas.username.kit305assig02;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 
 import java.util.ArrayList;
 
@@ -42,7 +43,7 @@ public class TicketTable
     public static final String CREATE_STATEMENT = "CREATE TABLE     "
             + TABLE_NAME
             + "    (" + KEY_TICKET_ID + " integer primary key autoincrement, "
-            + KEY_RAFFLE_ID + " int not null, "
+            + KEY_RAFFLE_ID + " integer, "
             + KEY_NAME + " string not null, "
             + KEY_PHONE + " int not null, "
             + KEY_EMAIL + " string not null, "
@@ -91,6 +92,38 @@ public class TicketTable
         }
 
         return results;
+    }
+
+
+    // because logic never works with programing does it
+    // so lamfo you don't get to see each raffles tickets
+    public static ArrayList<Ticket> selectFromRaffle(SQLiteDatabase db, String raffleID)
+    {
+        ArrayList<Ticket> results = new ArrayList<>();
+
+        Cursor c = db.query(TABLE_NAME, null, null, null, null, null, null);
+
+        if (c != null)
+        {
+            c.moveToFirst();
+
+            while(!c.isAfterLast())
+            {
+                if (KEY_RAFFLE_ID.equals(raffleID))
+                {
+                    Ticket t = createFromCursor(c);
+                    results.add(t);
+
+                    c.moveToNext();
+                }
+                else
+                {
+                    c.moveToNext();
+                }
+            }
+        }
+
+        return  results;
     }
 
     public static void update(SQLiteDatabase db, Ticket t)

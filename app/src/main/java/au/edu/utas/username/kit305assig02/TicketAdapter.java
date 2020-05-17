@@ -22,7 +22,7 @@ public class TicketAdapter extends ArrayAdapter<Ticket>
         this.mLayoutResourceID = resource;
     }
 
-    /*@NonNull
+    @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
     {
@@ -30,13 +30,15 @@ public class TicketAdapter extends ArrayAdapter<Ticket>
 
         View row = layoutInflater.inflate(mLayoutResourceID, parent, false);
         Ticket t = this.getItem(position);
-        TextView lblTicketName = row.findViewById(R.id.lblTicketName);
-        lblTicketName.setText(t.getName());
-        //TextView lblPhone = row.findViewById(R.id.lblPhone);
-        //lblPhone.setText(t.getPhone());
-        TextView lblEmail = row.findViewById(R.id.lblEmail);
-        lblEmail.setText(t.getEmail());
+        TextView lblTicketName = row.findViewById(R.id.txtName);
+        lblTicketName.setText("Name: " + t.getName());
+        TextView lblTicketNo = row.findViewById(R.id.lblTicketNo);
+        lblTicketNo.setText("Ticket Number: " + String.valueOf(t.getRaffleID()));
+        TextView lblPhone = row.findViewById(R.id.txtPhone);
+        lblPhone.setText("Phone: " + t.getPhone());
+        TextView lblEmail = row.findViewById(R.id.txtEmail);
+        lblEmail.setText("Email: " + t.getEmail());
 
         return row;
-    }*/
+    }
 }

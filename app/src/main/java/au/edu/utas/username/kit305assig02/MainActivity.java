@@ -1,7 +1,6 @@
 package au.edu.utas.username.kit305assig02;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,15 +9,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
 /* As the comments of this code will never be marked I will leave you a picture of something that will never happen in this code.
-Thanks for teaching me enough so that I know that I don't know enough to do anything in this waste of time of a unit
-
+   You will find notes of anger and frustration within read at your own discretion, thank you for compounding my hatred of programing
+   I did intend on doing HD level but it really wasn't worth the effort
                                |       |
                                 \\_V_//
                                 \/=|=\/
@@ -51,6 +49,7 @@ public class MainActivity extends AppCompatActivity
     // This is stupid, why can't you just read shit into the clicks
     public static int RAFFLE_ID;
     public static int SELECTED_RAFFLE;
+    public static int SELECTED_RAFFLE_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -65,6 +64,8 @@ public class MainActivity extends AppCompatActivity
 
         final ArrayList<Raffle> raffles =RaffleTable.selectAll(dbR);
         final ArrayList<Ticket> tickets =TicketTable.selectAll(dbT);
+
+        getSupportActionBar().setTitle("Raffle Management Application");
 
         for (Raffle var : raffles)
         {
@@ -96,11 +97,14 @@ public class MainActivity extends AppCompatActivity
             {
                 // when did you teach us to pull stuff out of the database
                 Raffle r = raffles.get(position);
-                // because having everything start at 0 is too hard apparently
                 RAFFLE_ID = position;
+                SELECTED_RAFFLE_ID = r.getRaffleID();
                 Intent i = new Intent(view.getContext(), RaffleDetails.class);
                 i.putExtra(String.valueOf(SELECTED_RAFFLE), r.getRaffleID());
+                i.putExtra(String.valueOf(SELECTED_RAFFLE_ID), r.getRaffleID());
                 Log.d(TAG, "SELECTED_RAFFLE: " + SELECTED_RAFFLE);
+                Log.d(TAG, "RAFFLE_ID: " + RAFFLE_ID);
+                Log.d(TAG, "SELECTED_RAFFLE_ID: " + SELECTED_RAFFLE_ID);
                 startActivity(i);
             }
         });

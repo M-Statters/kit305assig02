@@ -11,11 +11,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
-public class UpdateRaffle extends AppCompatActivity
+public class RaffleUpdate extends AppCompatActivity
 {
     private static final String TAG = "UpdateRaffle Log";
 
@@ -23,14 +21,16 @@ public class UpdateRaffle extends AppCompatActivity
     public static int SELECTED_RAFFLE;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.update_raffle);
         Database databaseConnection = new Database(this);
         final SQLiteDatabase dbR = databaseConnection.open();
 
         final ArrayList<Raffle> raffles = RaffleTable.selectAll(dbR);
+
+        getSupportActionBar().setTitle("Raffle Management Application");
 
         TextView txtRaffleName = findViewById(R.id.txtName);
         txtRaffleName.setText(raffles.get(RaffleDetails.CURRENT_RAFFLE).getName());
@@ -69,17 +69,16 @@ public class UpdateRaffle extends AppCompatActivity
                 Log.d(TAG, "Max Tickets: " + enteredMax);
                 //int valueMax = Integer.parseInt(enteredMax);
 
-                Raffle raffle = new Raffle();
-                raffle.setName(enteredName);
-                raffle.setDescription(enteredDescription);
-                raffle.setPrice(enteredPrice);
-                raffle.setMaxTickets(enteredMax);
-                raffle.setStatus(1);
+                raffles.get(SELECTED_RAFFLE).setName(enteredName);
+                raffles.get(SELECTED_RAFFLE).setDescription(enteredDescription);
+                raffles.get(SELECTED_RAFFLE).setPrice(enteredPrice);
+                raffles.get(SELECTED_RAFFLE).setMaxTickets(enteredMax);
+                raffles.get(SELECTED_RAFFLE).setStatus(1);
 
-                RaffleTable.update(dbR, raffle);
+                RaffleTable.update(dbR, raffles.get(SELECTED_RAFFLE));
 
-                Intent i = new Intent(UpdateRaffle.this, RaffleDetails.class);
-                i.putExtra(String.valueOf(SELECTED_RAFFLE), raffle.getRaffleID());
+                Intent i = new Intent(RaffleUpdate.this, RaffleDetails.class);
+                i.putExtra(String.valueOf(SELECTED_RAFFLE), raffles.get(SELECTED_RAFFLE).getRaffleID());
                 startActivity(i);
             }
         });

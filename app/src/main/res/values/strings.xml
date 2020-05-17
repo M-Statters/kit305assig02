@@ -22,4 +22,17 @@
     <string name="update_raffle">update raffle</string>
     <string name="update_raffle_details">Update Raffle Details</string>
     <string name="raffle_name">Raffle Name</string>
+    <string name="View_Tickets" />
+    <string name="Draw_Raffle" />
+    <string name="draw_raffle">Draw Raffle</string>
+    <string name="view_tickets">View Tickets</string>
+    <string name="draw">Draw Raffle</string>
+    <string name="winners_name">Winners Name</string>
+    <string name="save_and_close_raffle">Save and Close Raffle</string>
+    <string name="add_image">Add Image</string>
+    <string name="load_picture">Load Picture</string>
+    <string name="selectpicture">selectPicture</string>
+    <string name="select_image">Select Image</string>
+    <string name="save_image">Save Image</string>
+    <string name="raffle_image">Raffle Image</string>
 </resources>
