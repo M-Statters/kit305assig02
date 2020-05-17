@@ -35,17 +35,16 @@ public class ImageSelect extends Activity
             }
         });
 
-        Button btnSave = findViewById(R.id.btnSave);
+        /*Button btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                imageView = (ImageView)findViewById(R.id.imageView);
-                imageView.setImageURI(imageUri);
+                imageView = (ImageView)findViewById(R.id.imgRaffle);
                 Intent i = new Intent(ImageSelect.this, RaffleDetails.class);
                 startActivity(i);
             }
-        });
+        });*/
     }
     private void openGallery() {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);

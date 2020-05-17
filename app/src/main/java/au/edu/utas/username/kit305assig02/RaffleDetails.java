@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -57,91 +59,112 @@ public class RaffleDetails extends AppCompatActivity
                 startActivity(d);
                 return true;
             case R.id.add_image:
-                Intent i = new Intent(this, ImageSelect.class);
+                /*Intent i = new Intent(this, ImageSelect.class);
                 i.putExtra(String.valueOf(CURRENT_RAFFLE), MainActivity.RAFFLE_ID);
-                startActivity(i);
+                startActivity(i);*/
+                imageView = (ImageView)findViewById(R.id.imgRaffle);
+                openGallery();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    ImageView imageView;
+    Button button;
+    private static final int PICK_IMAGE = 100;
+    Uri imageUri;
 
-        @SuppressLint("SetTextI18n")
-        @Override
-        protected void onCreate(Bundle savedInstanceState)
-        {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.raffle_details);
-            Database databaseConnection = new Database(this);
-            final SQLiteDatabase dbR = databaseConnection.open();
-            final SQLiteDatabase dbT = databaseConnection.open();
-
-            final ArrayList<Raffle> raffles = RaffleTable.selectAll(dbR);
-            final ArrayList<Ticket> tickets = TicketTable.selectAll(dbT);
-
-            getSupportActionBar().setTitle(raffles.get(MainActivity.RAFFLE_ID).getName());
-
-            /*TextView lblRaffleName = findViewById(R.id.lblRaffleName);
-            // this took me way too long to do
-            Log.d(TAG, "RAFFLE_ID: " + MainActivity.RAFFLE_ID);
-            Log.d(TAG, "NAME: " + raffles.get(MainActivity.RAFFLE_ID).getName());
-            lblRaffleName.setText(raffles.get(MainActivity.RAFFLE_ID).getName());*/
-
-            TextView lblRaffleDescription = findViewById(R.id.lblDescription);
-            Log.d(TAG, "DESCRIPTION: " + raffles.get(MainActivity.RAFFLE_ID).getDescription());
-            lblRaffleDescription.setText("Raffle description:\n" + raffles.get(MainActivity.RAFFLE_ID).getDescription());
-
-            TextView lblPrice = findViewById(R.id.lblPrice);
-            lblPrice.setText("Ticket Price:\n" + "$ " + raffles.get(MainActivity.RAFFLE_ID).getPrice());
-
-            TextView lblRaffleStatus = findViewById(R.id.lblRaffleStatus);
-            Log.d(TAG, "STATUS: " + raffles.get(MainActivity.RAFFLE_ID).getStatus());
-            if (raffles.get(MainActivity.RAFFLE_ID).getStatus() == 1)
-                    { lblRaffleStatus.setText("Status:\nOpen"); }
-            else    { lblRaffleStatus.setText("Status:\nClosed"); }
-
-
-
-
-            Button btnUpdate = findViewById(R.id.btnUpdateDetails);
-            btnUpdate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v)
-                {
-                    CURRENT_RAFFLE = MainActivity.RAFFLE_ID;
-                    Intent i = new Intent(RaffleDetails.this, RaffleUpdate.class);
-                    i.putExtra(String.valueOf(CURRENT_RAFFLE), MainActivity.RAFFLE_ID);
-                    startActivity(i);
-                }
-            });
-
-            Button btnDelete = findViewById(R.id.btnDelete);
-            btnDelete.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    Log.d(TAG, "Deleting: " + raffles.get(MainActivity.RAFFLE_ID).getName());
-                    RaffleTable.removeRaffle(dbR, raffles.get(MainActivity.RAFFLE_ID).getRaffleID(), "");
-                    Intent i = new Intent(RaffleDetails.this, MainActivity.class);
-                    startActivity(i);
-                }
-            });
-
-            Button btnNewTicket = findViewById(R.id.btnNewTicket);
-            btnNewTicket.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    CURRENT_RAFFLE = MainActivity.SELECTED_RAFFLE_ID;
-                    RAFFLE_PRICE = raffles.get(MainActivity.RAFFLE_ID).getPrice();
-                    Intent i = new Intent(RaffleDetails.this, NewTicket.class);
-                    i.putExtra(String.valueOf(CURRENT_RAFFLE), MainActivity.RAFFLE_ID);
-                    i.putExtra(String.valueOf(RAFFLE_PRICE), MainActivity.RAFFLE_ID);
-                    startActivity(i);
-                }
-            });
+    private void openGallery() {
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+            imageUri = data.getData();
+            imageView.setImageURI(imageUri);
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.raffle_details);
+        Database databaseConnection = new Database(this);
+        final SQLiteDatabase dbR = databaseConnection.open();
+        final SQLiteDatabase dbT = databaseConnection.open();
+
+        final ArrayList<Raffle> raffles = RaffleTable.selectAll(dbR);
+        final ArrayList<Ticket> tickets = TicketTable.selectAll(dbT);
+
+        getSupportActionBar().setTitle(raffles.get(MainActivity.RAFFLE_ID).getName());
+
+        /*TextView lblRaffleName = findViewById(R.id.lblRaffleName);
+        // this took me way too long to do
+        Log.d(TAG, "RAFFLE_ID: " + MainActivity.RAFFLE_ID);
+        Log.d(TAG, "NAME: " + raffles.get(MainActivity.RAFFLE_ID).getName());
+        lblRaffleName.setText(raffles.get(MainActivity.RAFFLE_ID).getName());*/
+
+        TextView lblRaffleDescription = findViewById(R.id.lblDescription);
+        Log.d(TAG, "DESCRIPTION: " + raffles.get(MainActivity.RAFFLE_ID).getDescription());
+        lblRaffleDescription.setText("Raffle description:\n" + raffles.get(MainActivity.RAFFLE_ID).getDescription());
+
+        TextView lblPrice = findViewById(R.id.lblPrice);
+        lblPrice.setText("Ticket Price:\n" + "$ " + raffles.get(MainActivity.RAFFLE_ID).getPrice());
+
+        TextView lblRaffleStatus = findViewById(R.id.lblRaffleStatus);
+        Log.d(TAG, "STATUS: " + raffles.get(MainActivity.RAFFLE_ID).getStatus());
+        if (raffles.get(MainActivity.RAFFLE_ID).getStatus() == 1)
+            { lblRaffleStatus.setText("Status:\nOpen"); }
+        else
+            { lblRaffleStatus.setText("Status:\nClosed"); }
+
+
+
+
+        Button btnUpdate = findViewById(R.id.btnUpdateDetails);
+        btnUpdate.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                CURRENT_RAFFLE = MainActivity.RAFFLE_ID;
+                Intent i = new Intent(RaffleDetails.this, RaffleUpdate.class);
+                i.putExtra(String.valueOf(CURRENT_RAFFLE), MainActivity.RAFFLE_ID);
+                startActivity(i);
+            }
+        });
+
+        Button btnDelete = findViewById(R.id.btnDelete);
+        btnDelete.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.d(TAG, "Deleting: " + raffles.get(MainActivity.RAFFLE_ID).getName());
+                RaffleTable.removeRaffle(dbR, raffles.get(MainActivity.RAFFLE_ID).getRaffleID(), "");
+                Intent i = new Intent(RaffleDetails.this, MainActivity.class);
+                startActivity(i);
+            }
+        });
+
+        Button btnNewTicket = findViewById(R.id.btnNewTicket);
+        btnNewTicket.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                CURRENT_RAFFLE = MainActivity.SELECTED_RAFFLE_ID;
+                RAFFLE_PRICE = raffles.get(MainActivity.RAFFLE_ID).getPrice();
+                Intent i = new Intent(RaffleDetails.this, NewTicket.class);
+                i.putExtra(String.valueOf(CURRENT_RAFFLE), MainActivity.RAFFLE_ID);
+                i.putExtra(String.valueOf(RAFFLE_PRICE), MainActivity.RAFFLE_ID);
+                startActivity(i);
+            }
+        });
+    }
 }
