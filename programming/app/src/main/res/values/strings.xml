@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name" translatable="false">Open Raffles</string>
+    <string name="new_raffle">new raffle</string>
+    <string name="raffle_name">Raffle Name:</string>
+    <string name="action_list" translatable="false">list of Raffles</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next" translatable="false">Next</string>
+    <string name="previous" translatable="false">Previous</string>
+    <string name="text1">Raffel1</string>
+    <string name="text2">Raffel2</string>
+    <string name="text3">Raffel3</string>
+    <string name="text4">Raffel4</string>
+    <string name="total_price">Total Price :</string>
+    <string name="number">Number :</string>
+    <string name="single_price">Single Price :</string>
+    <string name="finish">Finish</string>
+    <string name="cancel">Cancel</string>
+    <string name="raffle_number">Numbers Of Tickets</string>
+    <string name="description">Description:</string>
+    <string name="cancelled">Cancelled Raffles</string>
+    <string name="completed">Completed Raffles</string>
+    <string name="closed">Closed Raffles</string>
+    <string name="open">Open Raffles</string>
+    <string name="info">Raffle Info</string>
+    <string name="customer">Customer Name</string>
+    <string name="change_info">Change</string>
+    <string name="confirm">Confirm</string>
+    <string name="customer_info">Customer Information</string>
+    <string name="email">Email Address</string>
+    <string name="address">Address</string>
+    <string name="save">Save</string>
+    <string name="change_customer">Customer Info Change</string>
+    <string name="change_customer_info">Customer Info</string>
+    <string name="ticket_list">Ticket List</string>
+    <string name="ticket1">Ticket1</string>
+    <string name="ticket2">Ticket2</string>
+    <string name="ticket3">Ticket3</string>
+    <string name="ticket4">Ticket4</string>
+    <string name="selling_ticket">Selling Ticket</string>
+    <string name="date">Purchase Date :</string>
+    <string name="customer_list">Customers</string>
+    <string name="customer1">Customer1</string>
+    <string name="customer2">Customer2</string>
+    <string name="customer3">Customer3</string>
+    <string name="customer4">Customer4</string>
+    <string name="winning">Draw Winner</string>
+    <string name="send">send Text/Emil Notification</string>
+    <string name="winning_return">return</string>
+    <string name="status">status:</string>
+    <string name="Search_name">Search name or ticket number</string>
+    <string name="winner_name">Winner name </string>
+    <string name="ticket_number">ticket number</string>
+    <string name="share">Share</string>
+    <string name="image">Choose image</string>
+</resources>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="20dp"
+    android:orientation="vertical"
+    android:paddingRight="20dp"
+    tools:context=".TicketListActivity"
+    tools:ignore="ExtraText">
+
+    <Button
+        android:id="@+id/ticket1"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:autofillHints="@string/text1"
+        android:gravity="center"
+        android:inputType="text"
+        android:text="@string/ticket1"
+        />
+
+    <Button
+        android:id="@+id/ticket2"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:autofillHints="@string/ticket2"
+        android:gravity="center"
+        android:inputType="text"
+        android:text="@string/ticket2" />
+
+    <Button
+        android:id="@+id/ticket3"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:autofillHints="@string/ticket3"
+        android:gravity="center"
+        android:inputType="text"
+        android:text="@string/ticket3" />
+
+    <Button
+        android:id="@+id/ticket4"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:autofillHints="@string/ticket4"
+        android:gravity="center"
+        android:inputType="text"
+        android:text="@string/ticket4" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="25dp"
+        app:srcCompat="@android:drawable/ic_input_add" />
+</LinearLayout>

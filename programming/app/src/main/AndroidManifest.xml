@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.programming1">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".winningActivity" android:label="@string/winning"></activity>
+        <activity android:name=".ListActivity" />
+        <activity
+            android:name=".AddTicketActivity"
+            android:label="@string/selling_ticket" />
+        <activity
+            android:name=".TicketListActivity"
+            android:label="@string/ticket_list" />
+        <activity
+            android:name=".CustomerChangeActivity"
+            android:label="@string/change_customer_info" />
+        <activity
+            android:name=".CustomerInfoActivity"
+            android:label="@string/customer_info" />
+        <activity
+            android:name=".ChangeInfoActivity"
+            android:label="@string/change_info" />
+        <activity
+            android:name=".CancelledRaffleActivity"
+            android:label="@string/cancelled" />
+        <activity
+            android:name=".CompletedRaffleActivity"
+            android:label="@string/completed" />
+        <activity
+            android:name=".CloseRaffleActivity"
+            android:label="@string/closed" />
+        <activity
+            android:name=".RaffleInfoActivity"
+            android:label="@string/info" />
+
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@drawable/select_color" />
+
+        <activity
+            android:name=".NewRaffleActivity"
+            android:label="@string/new_raffle" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
