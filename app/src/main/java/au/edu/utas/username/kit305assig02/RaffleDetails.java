@@ -1,27 +1,19 @@
 package au.edu.utas.username.kit305assig02;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.util.Size;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,7 +26,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class RaffleDetails extends AppCompatActivity
 {
@@ -59,8 +50,14 @@ public class RaffleDetails extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
+        Database databaseConnection = new Database(this);
+        final SQLiteDatabase dbR = databaseConnection.open();
+        final SQLiteDatabase dbT = databaseConnection.open();
 
+        final ArrayList<Raffle> raffles = RaffleTable.selectAll(dbR);
+        final ArrayList<Ticket> tickets = TicketTable.selectAll(dbT);
 
+        // this was cancer
         switch (item.getItemId())
         {
             case R.id.view_tickets:
@@ -68,21 +65,43 @@ public class RaffleDetails extends AppCompatActivity
                 t.putExtra(String.valueOf(CURRENT_RAFFLE), MainActivity.RAFFLE_ID);
                 startActivity(t);
                 return true;
-            case R.id.draw_raffle:
-                // this was cancer
-                Intent d = new Intent(this, RaffleDraw.class);
-                d.putExtra(String.valueOf(CURRENT_RAFFLE), MainActivity.RAFFLE_ID);
-                startActivity(d);
+            case R.id.delete_raffle:
+                AlertDialog.Builder builderDelete = new AlertDialog.Builder(RaffleDetails.this);
+                builderDelete.setMessage("This cannot be undone.").setTitle("Delete Raffle?");
+                builderDelete.setCancelable(true);
+                builderDelete.setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        Log.d(TAG, "Deleting: " + raffles.get(MainActivity.RAFFLE_ID).getName());
+                        RaffleTable.removeRaffle(dbR, raffles.get(MainActivity.RAFFLE_ID).getRaffleID(), "");
+                        Intent i = new Intent(RaffleDetails.this, MainActivity.class);
+                        startActivity(i);
+
+                    }
+                });
+                builderDelete.setNegativeButton("No", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog dialogDelete = builderDelete.create(); dialogDelete.show();
+
+
                 return true;
             case R.id.add_image:
                 /*Intent i = new Intent(this, ImageSelect.class);
                 i.putExtra(String.valueOf(CURRENT_RAFFLE), MainActivity.RAFFLE_ID);
                 startActivity(i);*/
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(RaffleDetails.this);
-                builder.setMessage("Add an banner image for this raffle?").setTitle("New Banner");
-                builder.setCancelable(true);
-                builder.setPositiveButton("Gallery", new DialogInterface.OnClickListener()
+                AlertDialog.Builder builderImage = new AlertDialog.Builder(RaffleDetails.this);
+                builderImage.setMessage("Add an banner image for this raffle?").setTitle("New Banner");
+                builderImage.setCancelable(true);
+                builderImage.setPositiveButton("Gallery", new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
@@ -92,7 +111,7 @@ public class RaffleDetails extends AppCompatActivity
 
                     }
                 });
-                builder.setNegativeButton("Camera", new DialogInterface.OnClickListener()
+                builderImage.setNegativeButton("Camera", new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
@@ -101,7 +120,7 @@ public class RaffleDetails extends AppCompatActivity
                         //dispatchTakePictureIntent();
                     }
                 });
-                AlertDialog dialog = builder.create(); dialog.show();
+                AlertDialog dialogImage = builderImage.create(); dialogImage.show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -238,16 +257,16 @@ public class RaffleDetails extends AppCompatActivity
             }
         });
 
-        Button btnDelete = findViewById(R.id.btnDelete);
+        Button btnDelete = findViewById(R.id.btnDraw);
         btnDelete.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Log.d(TAG, "Deleting: " + raffles.get(MainActivity.RAFFLE_ID).getName());
-                RaffleTable.removeRaffle(dbR, raffles.get(MainActivity.RAFFLE_ID).getRaffleID(), "");
-                Intent i = new Intent(RaffleDetails.this, MainActivity.class);
-                startActivity(i);
+
+                Intent d = new Intent(RaffleDetails.this, RaffleDraw.class);
+                d.putExtra(String.valueOf(CURRENT_RAFFLE), MainActivity.RAFFLE_ID);
+                startActivity(d);
             }
         });
 

@@ -4,11 +4,14 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.util.Log;
 
 import java.util.ArrayList;
 
 public class TicketTable
 {
+    private static final String TAG = "TicketTable Log";
+
     public static Ticket createFromCursor(Cursor c)
     {
         if (c == null || c.isAfterLast() || c.isBeforeFirst())
@@ -96,12 +99,16 @@ public class TicketTable
 
 
     // because logic never works with programing does it
+    // tried using the selectAll function as a base. It was useless
     // so lamfo you don't get to see each raffles tickets
-    public static ArrayList<Ticket> selectFromRaffle(SQLiteDatabase db, String raffleID)
+    public static ArrayList<Ticket> selectTicketsFromRaffle(SQLiteDatabase db, String raffleID)
     {
         ArrayList<Ticket> results = new ArrayList<>();
 
-        Cursor c = db.query(TABLE_NAME, null, null, null, null, null, null);
+        Cursor c = db.query(TABLE_NAME, new String[] { KEY_RAFFLE_ID }, KEY_RAFFLE_ID + "=?", new String[] { raffleID }, null, null, null);
+
+
+        Log.d(TAG, "Value of c: " + c);
 
         if (c != null)
         {
@@ -109,7 +116,8 @@ public class TicketTable
 
             while(!c.isAfterLast())
             {
-                if (KEY_RAFFLE_ID.equals(raffleID))
+                Log.d(TAG, "c.equals(KEY_RAFFLE_ID)" + c.equals(KEY_RAFFLE_ID));
+                if (c.getInt(Integer.parseInt(KEY_RAFFLE_ID)) == Integer.parseInt(raffleID))
                 {
                     Ticket t = createFromCursor(c);
                     results.add(t);

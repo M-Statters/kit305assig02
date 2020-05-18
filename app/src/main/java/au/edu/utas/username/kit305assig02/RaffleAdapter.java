@@ -36,8 +36,9 @@ public class RaffleAdapter extends ArrayAdapter<Raffle>
         //lblRaffleID.setText("Raffle ID: " + String.valueOf(r.getRaffleID()));
         TextView lblPrice = row.findViewById(R.id.lblPrice);
         lblPrice.setText("Ticket Cost $"+r.getPrice());
-        TextView lblMaxTickets = row.findViewById(R.id.lblMaxTickets);
-        lblMaxTickets.setText("Total Tickets: "+r.getMaxTickets());
+        TextView lblTotalTickets = row.findViewById(R.id.lblTotalTickets);
+        // if I could get the selectTicketsFromRaffle function working properly this would display the number of sold tickets. At the moment it displays the max tickets value.
+        lblTotalTickets.setText("Total Tickets: " + r.getMaxTickets());
 
         return row;
     }
