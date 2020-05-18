@@ -71,12 +71,12 @@
         android:text="@string/update_details" />
 
     <Button
-        android:id="@+id/btnDelete"
+        android:id="@+id/btnDraw"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
-        android:text="@string/delete_raffle" />
+        android:text="@string/draw_raffle" />
 
     <Button
         android:id="@+id/btnNewTicket"

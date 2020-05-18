@@ -9,9 +9,9 @@
         android:title="@string/view_tickets"
         app:showAsAction="never" />
     <item
-        android:id="@+id/draw_raffle"
+        android:id="@+id/delete_raffle"
         android:orderInCategory="200"
-        android:title="@string/draw_raffle"
+        android:title="@string/delete_raffle"
         app:showAsAction="never" />
     <item
         android:id="@+id/add_image"

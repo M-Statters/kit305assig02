@@ -22,6 +22,8 @@ public class NewRaffle extends AppCompatActivity
         Database databaseConnection = new Database(this);
         final SQLiteDatabase db = databaseConnection.open();
 
+        getSupportActionBar().setTitle("Raffle Management Application");
+
         Button btnCreateRaffle = findViewById(R.id.btnCreate);
         btnCreateRaffle.setOnClickListener(new View.OnClickListener()
         {

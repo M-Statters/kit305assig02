@@ -65,12 +65,12 @@
                     tools:text="lblPrice" />
 
                 <TextView
-                    android:id="@+id/lblMaxTickets"
+                    android:id="@+id/lblTotalTickets"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:gravity="end"
-                    tools:text="lblMaxTickets" />
+                    tools:text="lblTotalTickets" />
 
             </LinearLayout>
 

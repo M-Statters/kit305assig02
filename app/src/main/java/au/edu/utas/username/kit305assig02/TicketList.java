@@ -28,8 +28,10 @@ public class TicketList extends AppCompatActivity
         final SQLiteDatabase dbT = databaseConnection.open();
 
         // doesn't work don't know why SQL is awful
-        // final ArrayList<Ticket> tickets = TicketTable.selectFromRaffle(dbT, String.valueOf(RaffleDetails.CURRENT_RAFFLE));
-        final ArrayList<Ticket> tickets = TicketTable.selectAll(dbT);
+        final ArrayList<Ticket> tickets = TicketTable.selectTicketsFromRaffle(dbT, String.valueOf(RaffleDetails.CURRENT_RAFFLE));
+        Log.d(TAG, "String.valueOf(RaffleDetails.CURRENT_RAFFLE) " + RaffleDetails.CURRENT_RAFFLE);
+        Log.d(TAG, "tickets: " + tickets);
+        //final ArrayList<Ticket> tickets = TicketTable.selectAll(dbT);
 
 
         getSupportActionBar().setTitle("Raffle Management Application");
