@@ -92,13 +92,13 @@ public class RaffleUpdate extends AppCompatActivity
                     Log.d(TAG, "Max Tickets: " + enteredMax);
                     //int valueMax = Integer.parseInt(enteredMax);
 
-                    raffles.get(SELECTED_RAFFLE).setName(enteredName);
-                    raffles.get(SELECTED_RAFFLE).setDescription(enteredDescription);
-                    raffles.get(SELECTED_RAFFLE).setPrice(enteredPrice);
-                    raffles.get(SELECTED_RAFFLE).setMaxTickets(enteredMax);
-                    raffles.get(SELECTED_RAFFLE).setStatus(1);
+                    raffles.get(MainActivity.RAFFLE_ID).setName(enteredName);
+                    raffles.get(MainActivity.RAFFLE_ID).setDescription(enteredDescription);
+                    raffles.get(MainActivity.RAFFLE_ID).setPrice(enteredPrice);
+                    raffles.get(MainActivity.RAFFLE_ID).setMaxTickets(enteredMax);
+                    raffles.get(MainActivity.RAFFLE_ID).setStatus(1);
 
-                    RaffleTable.update(dbR, raffles.get(SELECTED_RAFFLE));
+                    RaffleTable.update(dbR, raffles.get(MainActivity.RAFFLE_ID));
 
                     Intent i = new Intent(RaffleUpdate.this, RaffleDetails.class);
                     i.putExtra(String.valueOf(SELECTED_RAFFLE), raffles.get(SELECTED_RAFFLE).getRaffleID());

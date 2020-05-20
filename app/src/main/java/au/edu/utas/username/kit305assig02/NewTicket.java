@@ -50,7 +50,7 @@ public class NewTicket extends AppCompatActivity
                 Log.d(TAG, "Number of tickets: " + noNewTickets);
                 for (int j = 0; j < noNewTickets; j++)
                 {
-                    if (noTickets+noNewTickets >= MainActivity.MAX_TICKETS)
+                    if (noTickets + noNewTickets > MainActivity.MAX_TICKETS)
                     {
                         AlertDialog.Builder builderDelete = new AlertDialog.Builder(NewTicket.this);
                         builderDelete.setMessage("The ticket limit has been reached\n Current Tickets: " + noTickets + " Max Tickets: " + MainActivity.MAX_TICKETS).setTitle("Ticket Limit Reached");

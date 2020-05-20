@@ -44,7 +44,9 @@ public class TicketUpdate extends AppCompatActivity {
 
         TextView txtTicketPhone = findViewById(R.id.txtPhone);
         Log.d(TAG, "Phone: " + tickets.get(TicketList.TICKET).getPhone());
-        //txtTicketPhone.setText(tickets.get(TicketList.TICKET).getPhone());
+        // This acts weird, don't know why
+        // throws a java.lang.NullPointerException: Attempt to invoke virtual method 'void android.widget.TextView.setText(java.lang.CharSequence)' on a null object reference error
+        // txtTicketPhone.setText("" + tickets.get(TicketList.TICKET).getPhone());
 
         Button btnUpdateTicket = findViewById(R.id.btnUpdateTicket);
         btnUpdateTicket.setOnClickListener(new View.OnClickListener() {
@@ -69,21 +71,11 @@ public class TicketUpdate extends AppCompatActivity {
                 }
                 Log.d(TAG, "Phone: " + enteredPhone);
 
-                LocalDateTime currentDateTime = LocalDateTime.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
-                String formattedDateTime = currentDateTime.format(formatter);
+                tickets.get(TicketList.TICKET).setName(enteredName);
+                tickets.get(TicketList.TICKET).setEmail(enteredEmail);
+                tickets.get(TicketList.TICKET).setPhone(enteredPhone);
 
-
-                Ticket ticket = new Ticket();
-                ticket.setRaffleID(MainActivity.SELECTED_RAFFLE_ID);
-                Log.d(TAG, "Raffle ID: " + RaffleDetails.CURRENT_RAFFLE);
-                ticket.setName(enteredName);
-                ticket.setEmail(enteredEmail);
-                ticket.setPhone(enteredPhone);
-                ticket.setTime(formattedDateTime);
-                ticket.setPrice(RaffleDetails.RAFFLE_PRICE);
-
-                TicketTable.update(dbT, ticket);
+                TicketTable.update(dbT, tickets.get(TicketList.TICKET));
 
                 Intent i = new Intent(TicketUpdate.this, TicketList.class);
                 startActivity(i);
