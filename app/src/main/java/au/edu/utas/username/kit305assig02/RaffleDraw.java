@@ -84,6 +84,8 @@ public class RaffleDraw extends AppCompatActivity
                     Log.d(TAG, "Winner ID: " + winner);
                     TextView txtWinner = findViewById(R.id.txtWinner);
                     txtWinner.setText(tickets.get(winner).getName());
+                    raffles.get(MainActivity.RAFFLE_ID).setDescription("Winner was: " + tickets.get(winner).getName());
+                    RaffleTable.update(dbR, raffles.get(MainActivity.RAFFLE_ID));
                 }
             }
         });
