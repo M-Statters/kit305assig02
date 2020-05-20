@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,7 +17,7 @@ public class TicketList extends AppCompatActivity
 {
     private static final String TAG = "TicketList Log";
 
-    public static String CURRENT_RAFFLE;
+    public static int CURRENT_RAFFLE;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -27,18 +29,30 @@ public class TicketList extends AppCompatActivity
         final SQLiteDatabase dbR = databaseConnection.open();
         final SQLiteDatabase dbT = databaseConnection.open();
 
-        // doesn't work don't know why SQL is awful
-        final ArrayList<Ticket> tickets = TicketTable.selectTicketsFromRaffle(dbT, String.valueOf(RaffleDetails.CURRENT_RAFFLE));
-        Log.d(TAG, "String.valueOf(RaffleDetails.CURRENT_RAFFLE) " + RaffleDetails.CURRENT_RAFFLE);
+        final ArrayList<Raffle> raffles = RaffleTable.selectAll(dbR);
+        final ArrayList<Ticket> tickets = TicketTable.selectTicketsFromRaffle(dbT, MainActivity.SELECTED_RAFFLE_ID);
+        //Log.d(TAG, "String.valueOf(RaffleDetails.CURRENT_RAFFLE) " + RaffleDetails.CURRENT_RAFFLE);
+        Log.d(TAG, "CURRENT_RAFFLE: " + MainActivity.SELECTED_RAFFLE_ID);
         Log.d(TAG, "tickets: " + tickets);
         //final ArrayList<Ticket> tickets = TicketTable.selectAll(dbT);
 
 
-        getSupportActionBar().setTitle("Raffle Management Application");
+        getSupportActionBar().setTitle(raffles.get(MainActivity.RAFFLE_ID).getName() + " Tickets:");
 
         final ListView myList = findViewById(R.id.lstTickets);
 
         final TicketAdapter ticketListAdapter = new TicketAdapter(getApplicationContext(),R.layout.ticket_list, tickets);
         myList.setAdapter(ticketListAdapter);
+
+        myList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+
+            }
+
+        });
     }
 }

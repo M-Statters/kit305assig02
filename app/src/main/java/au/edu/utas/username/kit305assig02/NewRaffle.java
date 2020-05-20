@@ -1,5 +1,7 @@
 package au.edu.utas.username.kit305assig02;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -36,6 +38,9 @@ public class NewRaffle extends AppCompatActivity
 
                 EditText raffleDescription = findViewById(R.id.txtDescription);
                 String enteredDescription = raffleDescription.getText().toString();
+                if (enteredDescription.matches("")) {
+                    enteredDescription = "No description provided";
+                }
                 Log.d(TAG, "Description: " + enteredDescription);
 
                 // This is the dumbest shit I have ever seen
@@ -49,17 +54,36 @@ public class NewRaffle extends AppCompatActivity
                 Log.d(TAG, "Max Tickets: " + enteredMax);
                 //int valueMax = Integer.parseInt(enteredMax);
 
-                Raffle raffle = new Raffle();
-                raffle.setName(enteredName);
-                raffle.setDescription(enteredDescription);
-                raffle.setPrice(enteredPrice);
-                raffle.setMaxTickets(enteredMax);
-                raffle.setStatus(1);
+                if (enteredName.matches("") || enteredPrice.matches("") || enteredMax.matches("") )
+                {
+                    AlertDialog.Builder builderDelete = new AlertDialog.Builder(NewRaffle.this);
+                    builderDelete.setMessage("Please complete all fields").setTitle("Missing Data");
+                    builderDelete.setCancelable(true);
+                    builderDelete.setPositiveButton("OK", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog dialogDelete = builderDelete.create();
+                    dialogDelete.show();
+                }
+                else
+                {
+                    Raffle raffle = new Raffle();
+                    raffle.setName(enteredName);
+                    raffle.setDescription(enteredDescription);
+                    raffle.setPrice(enteredPrice);
+                    raffle.setMaxTickets(enteredMax);
+                    raffle.setStatus(1);
 
-                RaffleTable.insert(db, raffle);
+                    RaffleTable.insert(db, raffle);
 
-                Intent i = new Intent(NewRaffle.this, MainActivity.class);
-                startActivity(i);
+                    Intent i = new Intent(NewRaffle.this, MainActivity.class);
+                    startActivity(i);
+                }
             }
         });
     }

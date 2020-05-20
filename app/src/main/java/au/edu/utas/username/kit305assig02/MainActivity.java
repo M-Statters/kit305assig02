@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity
     public static int RAFFLE_ID;
     public static int SELECTED_RAFFLE;
     public static int SELECTED_RAFFLE_ID;
+    public static int MAX_TICKETS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -63,7 +64,6 @@ public class MainActivity extends AppCompatActivity
         final SQLiteDatabase dbT = databaseConnection.open();
 
         final ArrayList<Raffle> raffles =RaffleTable.selectAll(dbR);
-        final ArrayList<Ticket> tickets =TicketTable.selectAll(dbT);
 
         getSupportActionBar().setTitle("Raffle Management Application");
 
@@ -99,9 +99,11 @@ public class MainActivity extends AppCompatActivity
                 Raffle r = raffles.get(position);
                 RAFFLE_ID = position;
                 SELECTED_RAFFLE_ID = r.getRaffleID();
+                MAX_TICKETS = Integer.valueOf(r.getMaxTickets());
                 Intent i = new Intent(view.getContext(), RaffleDetails.class);
                 i.putExtra(String.valueOf(SELECTED_RAFFLE), r.getRaffleID());
                 i.putExtra(String.valueOf(SELECTED_RAFFLE_ID), r.getRaffleID());
+                i.putExtra(String.valueOf(MAX_TICKETS), r.getRaffleID());
                 Log.d(TAG, "SELECTED_RAFFLE: " + SELECTED_RAFFLE);
                 Log.d(TAG, "RAFFLE_ID: " + RAFFLE_ID);
                 Log.d(TAG, "SELECTED_RAFFLE_ID: " + SELECTED_RAFFLE_ID);

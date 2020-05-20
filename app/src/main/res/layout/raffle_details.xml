@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="92dp"
         android:contentDescription="@string/raffle_image"
-        tools:src="@tools:sample/avatars" />
+        app:srcCompat="@color/colorAccent"
+        tools:src="@drawable/ic_launcher_background" />
 
     <!--<TextView
         android:id="@+id/lblRaffleName"

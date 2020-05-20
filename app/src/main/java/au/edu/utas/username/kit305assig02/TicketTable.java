@@ -101,14 +101,15 @@ public class TicketTable
     // because logic never works with programing does it
     // tried using the selectAll function as a base. It was useless
     // so lamfo you don't get to see each raffles tickets
-    public static ArrayList<Ticket> selectTicketsFromRaffle(SQLiteDatabase db, String raffleID)
+    // actually you do this was so stupid to make
+    public static ArrayList<Ticket> selectTicketsFromRaffle(SQLiteDatabase db, int raffleID)
     {
         ArrayList<Ticket> results = new ArrayList<>();
 
-        Cursor c = db.query(TABLE_NAME, new String[] { KEY_RAFFLE_ID }, KEY_RAFFLE_ID + "=?", new String[] { raffleID }, null, null, null);
+        //Cursor c = db.query(TABLE_NAME, new String[] { KEY_RAFFLE_ID }, KEY_RAFFLE_ID + "=?", new String[] { raffleID }, null, null, null);
+        Cursor c = db.query(TABLE_NAME, null, null, null, null, null, null);
 
-
-        Log.d(TAG, "Value of c: " + c);
+        //Log.d(TAG, "c.getInt(2): " + c.getInt(2));
 
         if (c != null)
         {
@@ -116,8 +117,10 @@ public class TicketTable
 
             while(!c.isAfterLast())
             {
-                Log.d(TAG, "c.equals(KEY_RAFFLE_ID)" + c.equals(KEY_RAFFLE_ID));
-                if (c.getInt(Integer.parseInt(KEY_RAFFLE_ID)) == Integer.parseInt(raffleID))
+                Log.d(TAG, "raffle_id index: " + c.getColumnIndex("raffle_id"));
+                Log.d(TAG, "Count: " + c.getCount());
+                Log.d(TAG, "Int: " + c.getInt(0));
+                if (c.getInt(c.getColumnIndex("raffle_id")) == raffleID)
                 {
                     Ticket t = createFromCursor(c);
                     results.add(t);

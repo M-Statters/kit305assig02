@@ -1,5 +1,7 @@
 package au.edu.utas.username.kit305assig02;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
@@ -37,8 +39,8 @@ public class RaffleDraw extends AppCompatActivity
         final SQLiteDatabase dbT = databaseConnection.open();
 
         final ArrayList<Raffle> raffles = RaffleTable.selectAll(dbR);
-        // final ArrayList<Ticket> tickets = TicketTable.selectFromRaffle(dbT, String.valueOf(0));
-        final ArrayList<Ticket> tickets = TicketTable.selectAll(dbT);
+        final ArrayList<Ticket> tickets = TicketTable.selectTicketsFromRaffle(dbT, MainActivity.SELECTED_RAFFLE_ID);
+        // final ArrayList<Ticket> tickets = TicketTable.selectAll(dbT);
         Log.d(TAG, "CURRENT_RAFFLE: " + CURRENT_RAFFLE);
         Log.d(TAG, "tickets" + tickets);
 
@@ -58,13 +60,31 @@ public class RaffleDraw extends AppCompatActivity
                 //long noTickets = DatabaseUtils.longForQuery(dbT, "SELECT COUNT (*) FROM " + TicketTable.KEY_RAFFLE_ID + " WHERE " + MainActivity.RAFFLE_ID + "=?",
                         //new String[] { String.valueOf(raffleList) });
 
-                long noTickets = DatabaseUtils.queryNumEntries(dbT, TicketTable.TABLE_NAME);
-                // long noTickets = tickets.size();
-                Log.d(TAG, "Number of tickets: " + noTickets);
-                final int winner = new Random().nextInt((int) noTickets);
-                Log.d(TAG, "Winner ID: " + winner);
-                TextView txtWinner = findViewById(R.id.txtWinner);
-                txtWinner.setText(tickets.get(winner).getName());
+                // long noTickets = DatabaseUtils.queryNumEntries(dbT, TicketTable.TABLE_NAME);
+                long noTickets = tickets.size();
+                if (noTickets < 1)
+                {
+                    AlertDialog.Builder builderDelete = new AlertDialog.Builder(RaffleDraw.this);
+                    builderDelete.setMessage("Please enter tickets first.").setTitle("No tickets found");
+                    builderDelete.setCancelable(true);
+                    builderDelete.setPositiveButton("OK", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog dialogDelete = builderDelete.create(); dialogDelete.show();
+                }
+                else
+                {
+                    Log.d(TAG, "Number of tickets: " + noTickets);
+                    final int winner = new Random().nextInt((int) noTickets);
+                    Log.d(TAG, "Winner ID: " + winner);
+                    TextView txtWinner = findViewById(R.id.txtWinner);
+                    txtWinner.setText(tickets.get(winner).getName());
+                }
             }
         });
 
