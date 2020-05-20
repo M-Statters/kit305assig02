@@ -233,7 +233,7 @@ public class RaffleDetails extends AppCompatActivity
         final SQLiteDatabase dbT = databaseConnection.open();
 
         final ArrayList<Raffle> raffles = RaffleTable.selectAll(dbR);
-        final ArrayList<Ticket> tickets = TicketTable.selectAll(dbT);
+        final ArrayList<Ticket> tickets = TicketTable.selectTicketsFromRaffle(dbT, MainActivity.SELECTED_RAFFLE_ID);
 
         getSupportActionBar().setTitle(raffles.get(MainActivity.RAFFLE_ID).getName());
 
@@ -248,7 +248,10 @@ public class RaffleDetails extends AppCompatActivity
         lblRaffleDescription.setText("Raffle description:\n" + raffles.get(MainActivity.RAFFLE_ID).getDescription());
 
         TextView lblPrice = findViewById(R.id.lblPrice);
-        lblPrice.setText("Ticket Price:\n" + "$ " + raffles.get(MainActivity.RAFFLE_ID).getPrice());
+        lblPrice.setText("Ticket Price: " + "$ " + raffles.get(MainActivity.RAFFLE_ID).getPrice());
+
+        TextView lblTickets = findViewById(R.id.lblTickets);
+        lblTickets.setText(tickets.size()+ " Tickets Sold");
 
         TextView lblRaffleStatus = findViewById(R.id.lblRaffleStatus);
         Log.d(TAG, "STATUS: " + raffles.get(MainActivity.RAFFLE_ID).getStatus());
