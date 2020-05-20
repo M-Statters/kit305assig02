@@ -39,6 +39,8 @@ public class TicketAdapter extends ArrayAdapter<Ticket>
         TextView lblEmail = row.findViewById(R.id.txtEmail);
         lblEmail.setText("Email: " + t.getEmail());
 
+
+
         return row;
     }
 }

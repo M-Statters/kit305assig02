@@ -273,8 +273,8 @@ public class RaffleDetails extends AppCompatActivity
             }
         });
 
-        Button btnDelete = findViewById(R.id.btnDraw);
-        btnDelete.setOnClickListener(new View.OnClickListener()
+        Button btnDraw = findViewById(R.id.btnDraw);
+        btnDraw.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)

@@ -29,12 +29,14 @@ public class NewTicket extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_ticket);
         Database databaseConnection = new Database(this);
+        final SQLiteDatabase dbR = databaseConnection.open();
         final SQLiteDatabase dbT = databaseConnection.open();
 
+        final ArrayList<Raffle> raffles = RaffleTable.selectAll(dbR);
         final ArrayList<Ticket> tickets = TicketTable.selectTicketsFromRaffle(dbT, MainActivity.SELECTED_RAFFLE_ID);
         final int noTickets = tickets.size();
 
-        getSupportActionBar().setTitle("Raffle Management Application");
+        getSupportActionBar().setTitle(raffles.get(MainActivity.RAFFLE_ID).getName());
 
         Button btnCreateRaffle = findViewById(R.id.btnCreate);
         btnCreateRaffle.setOnClickListener(new View.OnClickListener()
