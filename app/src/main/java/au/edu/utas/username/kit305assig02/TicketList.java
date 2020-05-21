@@ -92,7 +92,7 @@ public class TicketList extends AppCompatActivity
                 s.setAction(Intent.ACTION_SEND);
                 s.putExtra(Intent.EXTRA_TEXT,
                         "Ticket Details: \n" +
-                                "Raffle Name: " + raffles.get(MainActivity.SELECTED_RAFFLE_ID).getName() +
+                                "Raffle Name: " + raffles.get(MainActivity.RAFFLE_ID).getName() +
                                 "\nTicket Number: " + tickets.get(TicketList.TICKET).getTicketNumber() +
                                 "\nName: " + tickets.get(TicketList.TICKET).getName() +
                                 "\nEmail: " + tickets.get(TicketList.TICKET).getPhone() +

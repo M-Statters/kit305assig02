@@ -45,7 +45,9 @@ public class NewTicket extends AppCompatActivity
         {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
+                int ticketNumber = 0;
                 EditText tickets = findViewById(R.id.intTickets);
                 String enteredTickets = tickets.getText().toString();
                 int noNewTickets = Integer.parseInt(enteredTickets);
@@ -93,17 +95,15 @@ public class NewTicket extends AppCompatActivity
                         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
                         String formattedDateTime = currentDateTime.format(formatter);
 
+                        // This is dumb why can't I just use the ArrayList from the onCreate
+                        final ArrayList<Ticket> ticketsForNumber = TicketTable.selectTicketsFromRaffle(dbT, MainActivity.SELECTED_RAFFLE_ID);
 
-
-                        int ticketNumber = 0;
-                        if (noTickets == 0)
+                        if (ticketNumber == 0)
                         {
-                            ticketNumber = 1;
+                            ticketNumber++;
                         }
                         else
                         {
-                            // This is dumb why can't I just use the ArrayList from the onCreate
-                            final ArrayList<Ticket> ticketsForNumber = TicketTable.selectTicketsFromRaffle(dbT, MainActivity.SELECTED_RAFFLE_ID);
                             Ticket lastTicket = ticketsForNumber.get(ticketsForNumber.size() - 1);
                             ticketNumber = lastTicket.getTicketNumber() + 1;
                         }
@@ -120,12 +120,13 @@ public class NewTicket extends AppCompatActivity
                         ticket.setPrice(RaffleDetails.RAFFLE_PRICE);
 
                         TicketTable.insert(dbT, ticket);
-
-                        Intent i = new Intent(NewTicket.this, RaffleDetails.class);
-                        startActivity(i);
+                        Log.d(TAG, "Raffle Inserted");
                     }
-            }
 
+
+            }
+                Intent i = new Intent(NewTicket.this, RaffleDetails.class);
+                startActivity(i);
 
             }
         });

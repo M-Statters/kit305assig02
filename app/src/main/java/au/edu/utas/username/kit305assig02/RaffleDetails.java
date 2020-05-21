@@ -256,12 +256,9 @@ public class RaffleDetails extends AppCompatActivity
         TextView lblRaffleStatus = findViewById(R.id.lblRaffleStatus);
         Log.d(TAG, "STATUS: " + raffles.get(MainActivity.RAFFLE_ID).getStatus());
         if (raffles.get(MainActivity.RAFFLE_ID).getStatus() == 1)
-            { lblRaffleStatus.setText("Status:\nOpen"); }
+            { lblRaffleStatus.setText("Status: Open"); }
         else
-            { lblRaffleStatus.setText("Status:\nClosed"); }
-
-
-
+            { lblRaffleStatus.setText("Status: Closed"); }
 
         Button btnUpdate = findViewById(R.id.btnUpdateDetails);
         btnUpdate.setOnClickListener(new View.OnClickListener()
@@ -288,6 +285,11 @@ public class RaffleDetails extends AppCompatActivity
                 startActivity(d);
             }
         });
+
+        if (raffles.get(MainActivity.RAFFLE_ID).getStatus() == 0)
+        {
+            btnDraw.setEnabled(false);
+        }
 
         Button btnNewTicket = findViewById(R.id.btnNewTicket);
         btnNewTicket.setOnClickListener(new View.OnClickListener()

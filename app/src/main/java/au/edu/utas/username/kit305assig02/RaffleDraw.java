@@ -98,7 +98,7 @@ public class RaffleDraw extends AppCompatActivity
             {
                 raffles.get(MainActivity.RAFFLE_ID).setStatus(0);
                 RaffleTable.update(dbR, raffles.get(MainActivity.RAFFLE_ID));
-                Intent i = new Intent(RaffleDraw.this, MainActivity.class);
+                Intent i = new Intent(RaffleDraw.this, RaffleDetails.class);
                 startActivity(i);
             }
         });
