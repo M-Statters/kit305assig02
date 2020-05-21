@@ -36,6 +36,8 @@ public class NewTicket extends AppCompatActivity
         final ArrayList<Ticket> tickets = TicketTable.selectTicketsFromRaffle(dbT, MainActivity.SELECTED_RAFFLE_ID);
         final int noTickets = tickets.size();
 
+
+
         getSupportActionBar().setTitle(raffles.get(MainActivity.RAFFLE_ID).getName());
 
         Button btnCreateRaffle = findViewById(R.id.btnCreate);
@@ -92,9 +94,25 @@ public class NewTicket extends AppCompatActivity
                         String formattedDateTime = currentDateTime.format(formatter);
 
 
+
+                        int ticketNumber = 0;
+                        if (noTickets == 0)
+                        {
+                            ticketNumber = 1;
+                        }
+                        else
+                        {
+                            // This is dumb why can't I just use the ArrayList from the onCreate
+                            final ArrayList<Ticket> ticketsForNumber = TicketTable.selectTicketsFromRaffle(dbT, MainActivity.SELECTED_RAFFLE_ID);
+                            Ticket lastTicket = ticketsForNumber.get(ticketsForNumber.size() - 1);
+                            ticketNumber = lastTicket.getTicketNumber() + 1;
+                        }
+
+
                         Ticket ticket = new Ticket();
                         ticket.setRaffleID(RaffleDetails.CURRENT_RAFFLE);
                         Log.d(TAG, "Raffle ID: " + RaffleDetails.CURRENT_RAFFLE);
+                        ticket.setTicketNumber(ticketNumber);
                         ticket.setName(enteredName);
                         ticket.setEmail(enteredEmail);
                         ticket.setPhone(enteredPhone);

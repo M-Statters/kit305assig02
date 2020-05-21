@@ -51,7 +51,7 @@ public class RaffleDraw extends AppCompatActivity
         Log.d(TAG, "Raffle ID: " + MainActivity.RAFFLE_ID);
 
 
-        Button btnDraw = findViewById(R.id.btnDrawRaffle);
+        final Button btnDraw = findViewById(R.id.btnDrawRaffle);
         btnDraw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -84,8 +84,9 @@ public class RaffleDraw extends AppCompatActivity
                     Log.d(TAG, "Winner ID: " + winner);
                     TextView txtWinner = findViewById(R.id.txtWinner);
                     txtWinner.setText(tickets.get(winner).getName());
-                    raffles.get(MainActivity.RAFFLE_ID).setDescription(raffles.get(MainActivity.RAFFLE_ID).getDescription() + "\nWinner was: " + tickets.get(winner).getName() + "\nWith Ticket Number: " + tickets.get(winner).getTicketID());
+                    raffles.get(MainActivity.RAFFLE_ID).setDescription(raffles.get(MainActivity.RAFFLE_ID).getDescription() + "\nWinner was: " + tickets.get(winner).getName() + "\nWith Ticket Number: " + tickets.get(winner).getTicketNumber());
                     RaffleTable.update(dbR, raffles.get(MainActivity.RAFFLE_ID));
+                    btnDraw.setEnabled(false);
                 }
             }
         });

@@ -24,6 +24,7 @@ public class TicketTable
             Ticket p = new Ticket();
             p.setTicketID(c.getInt(c.getColumnIndex(KEY_TICKET_ID)));
             p.setRaffleID(c.getInt(c.getColumnIndex(KEY_RAFFLE_ID)));
+            p.setTicketNumber(c.getInt(c.getColumnIndex(KEY_TICKET_NUMBER)));
             p.setName(c.getString(c.getColumnIndex(KEY_NAME)));
             p.setPhone(c.getString(c.getColumnIndex(KEY_PHONE)));
             p.setEmail(c.getString(c.getColumnIndex(KEY_EMAIL)));
@@ -33,22 +34,24 @@ public class TicketTable
         }
     }
 
-    public static final String TABLE_NAME     = "tickets";
+    public static final String TABLE_NAME        = "tickets";
 
-    public static final String KEY_TICKET_ID   = "ticket_id";
-    public static final String KEY_RAFFLE_ID   = "raffle_id";
-    public static final String KEY_NAME        = "name";
-    public static final String KEY_PHONE       = "phone";
-    public static final String KEY_EMAIL       = "email";
-    public static final String KEY_TIME        = "time";
-    public static final String KEY_PRICE       = "price";
+    public static final String KEY_TICKET_ID     = "ticket_id";
+    public static final String KEY_RAFFLE_ID     = "raffle_id";
+    public static final String KEY_TICKET_NUMBER = "ticket_number";
+    public static final String KEY_NAME          = "name";
+    public static final String KEY_PHONE         = "phone";
+    public static final String KEY_EMAIL         = "email";
+    public static final String KEY_TIME          = "time";
+    public static final String KEY_PRICE         = "price";
 
     public static final String CREATE_STATEMENT = "CREATE TABLE     "
             + TABLE_NAME
             + "    (" + KEY_TICKET_ID + " integer primary key autoincrement, "
             + KEY_RAFFLE_ID + " integer, "
+            + KEY_TICKET_NUMBER + " int not null, "
             + KEY_NAME + " string not null, "
-            + KEY_PHONE + " int not null, "
+            + KEY_PHONE + " string not null, "
             + KEY_EMAIL + " string not null, "
             + KEY_TIME + " string not null, "
             + KEY_PRICE + " int not null "
@@ -57,6 +60,7 @@ public class TicketTable
     {
         ContentValues values = new ContentValues();
         values.put(KEY_RAFFLE_ID, t.getRaffleID());
+        values.put(KEY_TICKET_NUMBER, t.getTicketNumber());
         values.put(KEY_NAME, t.getName());
         values.put(KEY_PHONE, t.getPhone());
         values.put(KEY_EMAIL, t.getEmail());
@@ -120,6 +124,7 @@ public class TicketTable
                 Log.d(TAG, "raffle_id index: " + c.getColumnIndex("raffle_id"));
                 Log.d(TAG, "Count: " + c.getCount());
                 Log.d(TAG, "Int: " + c.getInt(0));
+                // this makes zero sense
                 if (c.getInt(c.getColumnIndex("raffle_id")) == raffleID)
                 {
                     Ticket t = createFromCursor(c);
@@ -142,6 +147,7 @@ public class TicketTable
         ContentValues values = new ContentValues();
         values.put(KEY_TICKET_ID, t.getTicketID());
         values.put(KEY_RAFFLE_ID, t.getRaffleID());
+        values.put(KEY_TICKET_NUMBER, t.getTicketNumber());
         values.put(KEY_NAME, t.getName());
         values.put(KEY_PHONE, t.getPhone());
         values.put(KEY_EMAIL, t.getEmail());

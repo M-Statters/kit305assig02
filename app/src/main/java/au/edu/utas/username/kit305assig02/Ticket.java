@@ -4,6 +4,7 @@ public class Ticket
 {
     private int mTicketID;
     private int mRaffleID;
+    private int mTicketNumber;
     private String mName;
     private String mPhone;
     private String mEmail;
@@ -15,6 +16,9 @@ public class Ticket
 
     public int getRaffleID() { return  mRaffleID; }
     public void setRaffleID(int s) { this.mRaffleID = s; }
+
+    public int getTicketNumber() { return  mTicketNumber; }
+    public void setTicketNumber(int s) { this.mTicketNumber = s; }
 
     public String getName() { return  mName; }
     public void setName(String s) { this.mName = s; }
