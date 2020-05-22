@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="92dp"
         android:contentDescription="@string/raffle_image"
-        tools:src="@tools:sample/avatars" />
+        app:srcCompat="@color/colorAccent"
+        tools:src="@drawable/ic_launcher_background" />
 
     <!--<TextView
         android:id="@+id/lblRaffleName"
@@ -30,7 +31,7 @@
     <TextView
         android:id="@+id/lblDescription"
         android:layout_width="match_parent"
-        android:layout_height="67dp"
+        android:layout_height="120dp"
         android:layout_marginBottom="30dp"
         android:clickable="false"
         android:ellipsize="marquee"
@@ -45,8 +46,8 @@
     <TextView
         android:id="@+id/lblPrice"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginBottom="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="12dp"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
@@ -54,10 +55,21 @@
         tools:text="Ticket Price" />
 
     <TextView
+        android:id="@+id/lblTickets"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:textSize="20sp"
+        tools:text="Current Tickets" />
+
+    <TextView
         android:id="@+id/lblRaffleStatus"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginBottom="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="12dp"
         android:gravity="center"
         android:textSize="20sp"
         tools:text="Raffle Status" />

@@ -1,5 +1,7 @@
 package au.edu.utas.username.kit305assig02;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -27,8 +29,12 @@ public class RaffleUpdate extends AppCompatActivity
         setContentView(R.layout.update_raffle);
         Database databaseConnection = new Database(this);
         final SQLiteDatabase dbR = databaseConnection.open();
+        final SQLiteDatabase dbT = databaseConnection.open();
 
         final ArrayList<Raffle> raffles = RaffleTable.selectAll(dbR);
+        // final ArrayList<Ticket> tickets = TicketTable.selectAll(dbT);
+        final ArrayList<Ticket> tickets = TicketTable.selectTicketsFromRaffle(dbT, MainActivity.SELECTED_RAFFLE_ID);
+        final long noTickets = tickets.size();
 
         getSupportActionBar().setTitle("Raffle Management Application");
 
@@ -50,36 +56,54 @@ public class RaffleUpdate extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                EditText raffleName = findViewById(R.id.txtName);
-                String enteredName = raffleName.getText().toString();
-                Log.d(TAG, "Name: " + enteredName);
+                if (noTickets >= 1)
+                {
+                    AlertDialog.Builder builderDelete = new AlertDialog.Builder(RaffleUpdate.this);
+                    builderDelete.setMessage("This Raffle has already been started").setTitle("Can Not Edit Raffle");
+                    builderDelete.setCancelable(true);
+                    builderDelete.setPositiveButton("OK", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog dialogDelete = builderDelete.create(); dialogDelete.show();
+                }
+                else {
 
-                EditText raffleDescription = findViewById(R.id.txtDescription);
-                String enteredDescription = raffleDescription.getText().toString();
-                Log.d(TAG, "Description: " + enteredDescription);
+                    EditText raffleName = findViewById(R.id.txtName);
+                    String enteredName = raffleName.getText().toString();
+                    Log.d(TAG, "Name: " + enteredName);
 
-                // This is the dumbest shit I have ever seen
-                EditText rafflePrice = findViewById(R.id.intPrice);
-                String enteredPrice = rafflePrice.getText().toString();
-                //int valuePrice = Integer.parseInt(enteredPrice);
-                Log.d(TAG, "Price: " + enteredPrice);
+                    EditText raffleDescription = findViewById(R.id.txtDescription);
+                    String enteredDescription = raffleDescription.getText().toString();
+                    Log.d(TAG, "Description: " + enteredDescription);
 
-                EditText raffleMax = findViewById(R.id.intMaxTickets);
-                String enteredMax = raffleMax.getText().toString();
-                Log.d(TAG, "Max Tickets: " + enteredMax);
-                //int valueMax = Integer.parseInt(enteredMax);
+                    // This is the dumbest shit I have ever seen
+                    EditText rafflePrice = findViewById(R.id.intPrice);
+                    String enteredPrice = rafflePrice.getText().toString();
+                    //int valuePrice = Integer.parseInt(enteredPrice);
+                    Log.d(TAG, "Price: " + enteredPrice);
 
-                raffles.get(SELECTED_RAFFLE).setName(enteredName);
-                raffles.get(SELECTED_RAFFLE).setDescription(enteredDescription);
-                raffles.get(SELECTED_RAFFLE).setPrice(enteredPrice);
-                raffles.get(SELECTED_RAFFLE).setMaxTickets(enteredMax);
-                raffles.get(SELECTED_RAFFLE).setStatus(1);
+                    EditText raffleMax = findViewById(R.id.intMaxTickets);
+                    String enteredMax = raffleMax.getText().toString();
+                    Log.d(TAG, "Max Tickets: " + enteredMax);
+                    //int valueMax = Integer.parseInt(enteredMax);
 
-                RaffleTable.update(dbR, raffles.get(SELECTED_RAFFLE));
+                    raffles.get(MainActivity.RAFFLE_ID).setName(enteredName);
+                    raffles.get(MainActivity.RAFFLE_ID).setDescription(enteredDescription);
+                    raffles.get(MainActivity.RAFFLE_ID).setPrice(enteredPrice);
+                    raffles.get(MainActivity.RAFFLE_ID).setMaxTickets(enteredMax);
+                    raffles.get(MainActivity.RAFFLE_ID).setStatus(1);
 
-                Intent i = new Intent(RaffleUpdate.this, RaffleDetails.class);
-                i.putExtra(String.valueOf(SELECTED_RAFFLE), raffles.get(SELECTED_RAFFLE).getRaffleID());
-                startActivity(i);
+                    RaffleTable.update(dbR, raffles.get(MainActivity.RAFFLE_ID));
+
+                    Intent i = new Intent(RaffleUpdate.this, RaffleDetails.class);
+                    i.putExtra(String.valueOf(SELECTED_RAFFLE), raffles.get(SELECTED_RAFFLE).getRaffleID());
+                    startActivity(i);
+                }
             }
         });
     }

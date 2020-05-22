@@ -2,6 +2,7 @@ package au.edu.utas.username.kit305assig02;
 
 import android.app.Service;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RaffleAdapter extends ArrayAdapter<Raffle>
@@ -28,6 +30,7 @@ public class RaffleAdapter extends ArrayAdapter<Raffle>
     {
         LayoutInflater layoutInflater = (LayoutInflater)getContext().getSystemService((Service.LAYOUT_INFLATER_SERVICE));
 
+
         View row = layoutInflater.inflate(mLayoutResourceID, parent, false);
         Raffle r = this.getItem(position);
         TextView lblRaffleName = row.findViewById(R.id.lblRaffleName);
@@ -38,7 +41,8 @@ public class RaffleAdapter extends ArrayAdapter<Raffle>
         lblPrice.setText("Ticket Cost $"+r.getPrice());
         TextView lblTotalTickets = row.findViewById(R.id.lblTotalTickets);
         // if I could get the selectTicketsFromRaffle function working properly this would display the number of sold tickets. At the moment it displays the max tickets value.
-        lblTotalTickets.setText("Total Tickets: " + r.getMaxTickets());
+        lblTotalTickets.setText("Max Tickets: " + r.getMaxTickets());
+        //lblTotalTickets.setText("Current Tickets: " + );
 
         return row;
     }

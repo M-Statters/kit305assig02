@@ -1,5 +1,7 @@
 package au.edu.utas.username.kit305assig02;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
@@ -26,6 +28,7 @@ public class RaffleDraw extends AppCompatActivity
     private static final String TAG = "RaffleDraw Log";
 
     public static int CURRENT_RAFFLE;
+    public static int WINNER;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,8 +40,8 @@ public class RaffleDraw extends AppCompatActivity
         final SQLiteDatabase dbT = databaseConnection.open();
 
         final ArrayList<Raffle> raffles = RaffleTable.selectAll(dbR);
-        // final ArrayList<Ticket> tickets = TicketTable.selectFromRaffle(dbT, String.valueOf(0));
-        final ArrayList<Ticket> tickets = TicketTable.selectAll(dbT);
+        final ArrayList<Ticket> tickets = TicketTable.selectTicketsFromRaffle(dbT, MainActivity.SELECTED_RAFFLE_ID);
+        // final ArrayList<Ticket> tickets = TicketTable.selectAll(dbT);
         Log.d(TAG, "CURRENT_RAFFLE: " + CURRENT_RAFFLE);
         Log.d(TAG, "tickets" + tickets);
 
@@ -49,7 +52,7 @@ public class RaffleDraw extends AppCompatActivity
         Log.d(TAG, "Raffle ID: " + MainActivity.RAFFLE_ID);
 
 
-        Button btnDraw = findViewById(R.id.btnDrawRaffle);
+        final Button btnDraw = findViewById(R.id.btnDrawRaffle);
         btnDraw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -58,13 +61,34 @@ public class RaffleDraw extends AppCompatActivity
                 //long noTickets = DatabaseUtils.longForQuery(dbT, "SELECT COUNT (*) FROM " + TicketTable.KEY_RAFFLE_ID + " WHERE " + MainActivity.RAFFLE_ID + "=?",
                         //new String[] { String.valueOf(raffleList) });
 
-                long noTickets = DatabaseUtils.queryNumEntries(dbT, TicketTable.TABLE_NAME);
-                // long noTickets = tickets.size();
-                Log.d(TAG, "Number of tickets: " + noTickets);
-                final int winner = new Random().nextInt((int) noTickets);
-                Log.d(TAG, "Winner ID: " + winner);
-                TextView txtWinner = findViewById(R.id.txtWinner);
-                txtWinner.setText(tickets.get(winner).getName());
+                // long noTickets = DatabaseUtils.queryNumEntries(dbT, TicketTable.TABLE_NAME);
+                long noTickets = tickets.size();
+                if (noTickets < 1)
+                {
+                    AlertDialog.Builder builderDelete = new AlertDialog.Builder(RaffleDraw.this);
+                    builderDelete.setMessage("Please enter tickets first.").setTitle("No tickets found");
+                    builderDelete.setCancelable(true);
+                    builderDelete.setPositiveButton("OK", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog dialogDelete = builderDelete.create(); dialogDelete.show();
+                }
+                else
+                {
+                    Log.d(TAG, "Number of tickets: " + noTickets);
+                    WINNER = new Random().nextInt((int) noTickets);
+                    Log.d(TAG, "Winner ID: " + WINNER);
+                    TextView txtWinner = findViewById(R.id.txtWinner);
+                    txtWinner.setText(tickets.get(WINNER).getName());
+                    //raffles.get(MainActivity.RAFFLE_ID).setDescription(raffles.get(MainActivity.RAFFLE_ID).getDescription() + "\nWinner was: " + tickets.get(winner).getName() + "\nWith Ticket Number: " + tickets.get(winner).getTicketNumber());
+                    //RaffleTable.update(dbR, raffles.get(MainActivity.RAFFLE_ID));
+                    //btnDraw.setEnabled(false);
+                }
             }
         });
 
@@ -73,9 +97,10 @@ public class RaffleDraw extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                raffles.get(MainActivity.RAFFLE_ID).setDescription(raffles.get(MainActivity.RAFFLE_ID).getDescription() + "\nWinner was: " + tickets.get(WINNER).getName() + "\nWith Ticket Number: " + tickets.get(WINNER).getTicketNumber());
                 raffles.get(MainActivity.RAFFLE_ID).setStatus(0);
                 RaffleTable.update(dbR, raffles.get(MainActivity.RAFFLE_ID));
-                Intent i = new Intent(RaffleDraw.this, MainActivity.class);
+                Intent i = new Intent(RaffleDraw.this, RaffleDetails.class);
                 startActivity(i);
             }
         });

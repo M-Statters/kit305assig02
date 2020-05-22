@@ -1,32 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ListView
-        android:id="@+id/lstTickets"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:focusable="true" />
+    android:layout_height="match_parent"
+    >
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:id="@+id/linearLayout2"
+        android:layout_width="358dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:baselineAligned="false"
-        android:clickable="true"
-        android:focusable="true"
         android:orientation="horizontal"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
@@ -44,8 +33,6 @@
                 android:id="@+id/txtName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 tools:text="Name" />
@@ -85,7 +72,9 @@
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 tools:text="Phone No." />
+
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

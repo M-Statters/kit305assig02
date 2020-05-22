@@ -55,7 +55,9 @@ public class RaffleDetails extends AppCompatActivity
         final SQLiteDatabase dbT = databaseConnection.open();
 
         final ArrayList<Raffle> raffles = RaffleTable.selectAll(dbR);
-        final ArrayList<Ticket> tickets = TicketTable.selectAll(dbT);
+        // final ArrayList<Ticket> tickets = TicketTable.selectAll(dbT);
+        final ArrayList<Ticket> tickets = TicketTable.selectTicketsFromRaffle(dbT, MainActivity.SELECTED_RAFFLE_ID);
+        long noTickets = tickets.size();
 
         // this was cancer
         switch (item.getItemId())
@@ -66,33 +68,47 @@ public class RaffleDetails extends AppCompatActivity
                 startActivity(t);
                 return true;
             case R.id.delete_raffle:
-                AlertDialog.Builder builderDelete = new AlertDialog.Builder(RaffleDetails.this);
-                builderDelete.setMessage("This cannot be undone.").setTitle("Delete Raffle?");
-                builderDelete.setCancelable(true);
-                builderDelete.setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                if (noTickets >= 1)
                 {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
+                    AlertDialog.Builder builderDelete = new AlertDialog.Builder(RaffleDetails.this);
+                    builderDelete.setMessage("This Raffle has already been started").setTitle("Can Not Delete Raffle");
+                    builderDelete.setCancelable(true);
+                    builderDelete.setPositiveButton("OK", new DialogInterface.OnClickListener()
                     {
-                        Log.d(TAG, "Deleting: " + raffles.get(MainActivity.RAFFLE_ID).getName());
-                        RaffleTable.removeRaffle(dbR, raffles.get(MainActivity.RAFFLE_ID).getRaffleID(), "");
-                        Intent i = new Intent(RaffleDetails.this, MainActivity.class);
-                        startActivity(i);
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog dialogDelete = builderDelete.create(); dialogDelete.show();
+                }
+                else {
+                    AlertDialog.Builder builderDelete = new AlertDialog.Builder(RaffleDetails.this);
+                    builderDelete.setMessage("This cannot be undone.").setTitle("Delete Raffle?");
+                    builderDelete.setCancelable(true);
+                    builderDelete.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Log.d(TAG, "Deleting: " + raffles.get(MainActivity.RAFFLE_ID).getName());
+                            RaffleTable.removeRaffle(dbR, raffles.get(MainActivity.RAFFLE_ID).getRaffleID(), "");
+                            Intent i = new Intent(RaffleDetails.this, MainActivity.class);
+                            startActivity(i);
 
-                    }
-                });
-                builderDelete.setNegativeButton("No", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog dialogDelete = builderDelete.create(); dialogDelete.show();
+                        }
+                    });
+                    builderDelete.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog dialogDelete = builderDelete.create();
+                    dialogDelete.show();
+                }
+                    return true;
 
 
-                return true;
             case R.id.add_image:
                 /*Intent i = new Intent(this, ImageSelect.class);
                 i.putExtra(String.valueOf(CURRENT_RAFFLE), MainActivity.RAFFLE_ID);
@@ -217,7 +233,7 @@ public class RaffleDetails extends AppCompatActivity
         final SQLiteDatabase dbT = databaseConnection.open();
 
         final ArrayList<Raffle> raffles = RaffleTable.selectAll(dbR);
-        final ArrayList<Ticket> tickets = TicketTable.selectAll(dbT);
+        final ArrayList<Ticket> tickets = TicketTable.selectTicketsFromRaffle(dbT, MainActivity.SELECTED_RAFFLE_ID);
 
         getSupportActionBar().setTitle(raffles.get(MainActivity.RAFFLE_ID).getName());
 
@@ -232,17 +248,17 @@ public class RaffleDetails extends AppCompatActivity
         lblRaffleDescription.setText("Raffle description:\n" + raffles.get(MainActivity.RAFFLE_ID).getDescription());
 
         TextView lblPrice = findViewById(R.id.lblPrice);
-        lblPrice.setText("Ticket Price:\n" + "$ " + raffles.get(MainActivity.RAFFLE_ID).getPrice());
+        lblPrice.setText("Ticket Price: " + "$ " + raffles.get(MainActivity.RAFFLE_ID).getPrice());
+
+        TextView lblTickets = findViewById(R.id.lblTickets);
+        lblTickets.setText(tickets.size()+ " Tickets Sold");
 
         TextView lblRaffleStatus = findViewById(R.id.lblRaffleStatus);
         Log.d(TAG, "STATUS: " + raffles.get(MainActivity.RAFFLE_ID).getStatus());
         if (raffles.get(MainActivity.RAFFLE_ID).getStatus() == 1)
-            { lblRaffleStatus.setText("Status:\nOpen"); }
+            { lblRaffleStatus.setText("Status: Open"); }
         else
-            { lblRaffleStatus.setText("Status:\nClosed"); }
-
-
-
+            { lblRaffleStatus.setText("Status: Closed"); }
 
         Button btnUpdate = findViewById(R.id.btnUpdateDetails);
         btnUpdate.setOnClickListener(new View.OnClickListener()
@@ -257,8 +273,8 @@ public class RaffleDetails extends AppCompatActivity
             }
         });
 
-        Button btnDelete = findViewById(R.id.btnDraw);
-        btnDelete.setOnClickListener(new View.OnClickListener()
+        Button btnDraw = findViewById(R.id.btnDraw);
+        btnDraw.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -269,6 +285,11 @@ public class RaffleDetails extends AppCompatActivity
                 startActivity(d);
             }
         });
+
+        if (raffles.get(MainActivity.RAFFLE_ID).getStatus() == 0)
+        {
+            btnDraw.setEnabled(false);
+        }
 
         Button btnNewTicket = findViewById(R.id.btnNewTicket);
         btnNewTicket.setOnClickListener(new View.OnClickListener()

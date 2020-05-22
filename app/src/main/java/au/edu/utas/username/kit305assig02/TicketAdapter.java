@@ -33,11 +33,13 @@ public class TicketAdapter extends ArrayAdapter<Ticket>
         TextView lblTicketName = row.findViewById(R.id.txtName);
         lblTicketName.setText("Name: " + t.getName());
         TextView lblTicketNo = row.findViewById(R.id.lblTicketNo);
-        lblTicketNo.setText("Ticket Number: " + String.valueOf(t.getRaffleID()));
+        lblTicketNo.setText("Ticket Number: " + String.valueOf(t.getTicketNumber()));
         TextView lblPhone = row.findViewById(R.id.txtPhone);
         lblPhone.setText("Phone: " + t.getPhone());
         TextView lblEmail = row.findViewById(R.id.txtEmail);
         lblEmail.setText("Email: " + t.getEmail());
+
+
 
         return row;
     }

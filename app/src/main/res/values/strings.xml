@@ -35,4 +35,9 @@
     <string name="select_image">Select Image</string>
     <string name="save_image">Save Image</string>
     <string name="raffle_image">Raffle Image</string>
+    <string name="share">share</string>
+    <string name="edit_ticket">Edit</string>
+    <string name="update_ticket">Update Ticket</string>
+    <string name="price">Price</string>
+    <string name="hide_duplicates">Hide Duplicates</string>
 </resources>
