@@ -28,6 +28,7 @@ public class RaffleDraw extends AppCompatActivity
     private static final String TAG = "RaffleDraw Log";
 
     public static int CURRENT_RAFFLE;
+    public static int WINNER;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -80,13 +81,13 @@ public class RaffleDraw extends AppCompatActivity
                 else
                 {
                     Log.d(TAG, "Number of tickets: " + noTickets);
-                    final int winner = new Random().nextInt((int) noTickets);
-                    Log.d(TAG, "Winner ID: " + winner);
+                    WINNER = new Random().nextInt((int) noTickets);
+                    Log.d(TAG, "Winner ID: " + WINNER);
                     TextView txtWinner = findViewById(R.id.txtWinner);
-                    txtWinner.setText(tickets.get(winner).getName());
-                    raffles.get(MainActivity.RAFFLE_ID).setDescription(raffles.get(MainActivity.RAFFLE_ID).getDescription() + "\nWinner was: " + tickets.get(winner).getName() + "\nWith Ticket Number: " + tickets.get(winner).getTicketNumber());
-                    RaffleTable.update(dbR, raffles.get(MainActivity.RAFFLE_ID));
-                    btnDraw.setEnabled(false);
+                    txtWinner.setText(tickets.get(WINNER).getName());
+                    //raffles.get(MainActivity.RAFFLE_ID).setDescription(raffles.get(MainActivity.RAFFLE_ID).getDescription() + "\nWinner was: " + tickets.get(winner).getName() + "\nWith Ticket Number: " + tickets.get(winner).getTicketNumber());
+                    //RaffleTable.update(dbR, raffles.get(MainActivity.RAFFLE_ID));
+                    //btnDraw.setEnabled(false);
                 }
             }
         });
@@ -96,6 +97,7 @@ public class RaffleDraw extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                raffles.get(MainActivity.RAFFLE_ID).setDescription(raffles.get(MainActivity.RAFFLE_ID).getDescription() + "\nWinner was: " + tickets.get(WINNER).getName() + "\nWith Ticket Number: " + tickets.get(WINNER).getTicketNumber());
                 raffles.get(MainActivity.RAFFLE_ID).setStatus(0);
                 RaffleTable.update(dbR, raffles.get(MainActivity.RAFFLE_ID));
                 Intent i = new Intent(RaffleDraw.this, RaffleDetails.class);

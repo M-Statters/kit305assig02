@@ -130,9 +130,9 @@ public class NewTicket extends AppCompatActivity
                         // This is dumb why can't I just use the ArrayList from the onCreate
                         final ArrayList<Ticket> ticketsForNumber = TicketTable.selectTicketsFromRaffle(dbT, MainActivity.SELECTED_RAFFLE_ID);
 
-                        if (ticketNumber == 0)
+                        if (ticketsForNumber.size() == 0)
                         {
-                            ticketNumber++;
+                            ticketNumber = 1;
                         }
                         else
                         {

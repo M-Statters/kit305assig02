@@ -44,10 +44,7 @@ public class TicketList extends AppCompatActivity
         // this was cancer
         switch (item.getItemId())
         {
-            case R.id.share:
-                Log.d(TAG, "Share works");
-                return true;
-            case R.id.edit_ticket:
+            case R.id.hide_duplicates:
 
                 return true;
             default:
