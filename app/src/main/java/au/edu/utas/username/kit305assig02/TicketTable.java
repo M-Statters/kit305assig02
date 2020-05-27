@@ -125,6 +125,7 @@ public class TicketTable
                 Log.d(TAG, "Count: " + c.getCount());
                 Log.d(TAG, "Int: " + c.getInt(0));
                 // this makes zero sense
+                // why couldn't I just use the index number
                 if (c.getInt(c.getColumnIndex("raffle_id")) == raffleID)
                 {
                     Ticket t = createFromCursor(c);

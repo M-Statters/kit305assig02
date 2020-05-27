@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
-// thanks for teaching us how to do this
+// Not used moved it into the drop down menu
 
 public class ImageSelect extends Activity
 {

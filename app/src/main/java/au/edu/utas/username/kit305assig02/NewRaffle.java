@@ -43,7 +43,6 @@ public class NewRaffle extends AppCompatActivity
                 }
                 Log.d(TAG, "Description: " + enteredDescription);
 
-                // This is the dumbest shit I have ever seen
                 EditText rafflePrice = findViewById(R.id.intPrice);
                 String enteredPrice = rafflePrice.getText().toString();
                 //int valuePrice = Integer.parseInt(enteredPrice);

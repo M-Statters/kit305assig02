@@ -15,8 +15,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 /* As the comments of this code will never be marked I will leave you a picture of something that will never happen in this code.
-   You will find notes of anger and frustration within read at your own discretion, thank you for compounding my hatred of programing
-   I did intend on doing HD level but it really wasn't worth the effort
                                |       |
                                 \\_V_//
                                 \/=|=\/
@@ -46,7 +44,6 @@ public class MainActivity extends AppCompatActivity
     //This is the tag that is used for the Logcat output (useful for filtering output)
     private static final String TAG = "MainActivity Log";
 
-    // This is stupid, why can't you just read shit into the clicks
     public static int RAFFLE_ID;
     public static int SELECTED_RAFFLE;
     public static int SELECTED_RAFFLE_ID;
@@ -95,7 +92,6 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                // when did you teach us to pull stuff out of the database
                 Raffle r = raffles.get(position);
                 RAFFLE_ID = position;
                 SELECTED_RAFFLE_ID = r.getRaffleID();
